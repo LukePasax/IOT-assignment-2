@@ -3,7 +3,12 @@
 
 
 class Led : public Component {
+    
+        
     public:
+        Led(int pin): Component(pin) {
+            pinMode(pin, OUTPUT);
+        }
         void turnOn() {
             digitalWrite(getPin(), HIGH);
         }
