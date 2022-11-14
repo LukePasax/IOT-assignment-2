@@ -3,13 +3,11 @@
 
 
 class Led : public Component {
-    private:
-        int pin;
     public:
         void turnOn() {
-            digitalWrite(pin, HIGH);
+            digitalWrite(getPin(), HIGH);
         }
         void turnOff() {
-            digitalWrite(pin, LOW);
+            digitalWrite(getPin(), LOW);
         }
 };
