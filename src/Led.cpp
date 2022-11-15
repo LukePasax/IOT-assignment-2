@@ -1,18 +1,14 @@
-#include"src/Component.cpp"
 #include<Arduino.h>
+#include"Led.h"
 
+Led::Led(int pin) : Component(pin) {
+    pinMode(pin, OUTPUT);
+}
 
-class Led : public Component {
-    
-        
-    public:
-        Led(int pin): Component(pin) {
-            pinMode(pin, OUTPUT);
-        }
-        void turnOn() {
-            digitalWrite(getPin(), HIGH);
-        }
-        void turnOff() {
-            digitalWrite(getPin(), LOW);
-        }
-};
+void Led::turnOn() {
+    digitalWrite(getPin(), HIGH);
+}
+
+void Led::turnOff() {
+    digitalWrite(getPin(), LOW);
+}
