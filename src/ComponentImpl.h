@@ -1,6 +1,6 @@
 #ifndef __COMPONENTIMPL__
 #define __COMPONENTIMPL__
-#include "stdio.h"
+#include <Arduino.h>
 #include "Component.h"
 class ComponentImpl : public Component {
     
