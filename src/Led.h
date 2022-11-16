@@ -1,15 +1,11 @@
 #ifndef __LED__
 #define __LED__
-
-class Led {
-    
+#include "Component.h"
+class Led : public Component {
     public:
-        Led(uint8_t pin, uint8_t mode);
-        void turnOn();
-        void turnOff();
-        uint8_t getPin();
-    private:
-        uint8_t pin;
+        using Component::Component;
+        virtual void turnOn();
+        virtual void turnOff();
 };
 
 #endif
