@@ -1,8 +1,8 @@
 #include<Arduino.h>
 #include"Led.h"
 
-Led::Led(int pin) : Component(pin) {
-    pinMode(pin, OUTPUT);
+Led::Led(uint8_t pin, uint8_t mode) {
+    pinMode(pin, mode);
 }
 
 void Led::turnOn() {
@@ -11,4 +11,8 @@ void Led::turnOn() {
 
 void Led::turnOff() {
     digitalWrite(getPin(), LOW);
+}
+
+uint8_t Led::getPin(){
+    return this->pin;
 }
