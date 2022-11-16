@@ -1,9 +1,9 @@
 #ifndef __LED__
 #define __LED__
-#include "Component.h"
-class Led : public Component {
+#include "ComponentImpl.h"
+class Led : public ComponentImpl {
     public:
-        using Component::Component;
+        using ComponentImpl::ComponentImpl;
         virtual void turnOn();
         virtual void turnOff();
 };
