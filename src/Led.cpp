@@ -3,6 +3,7 @@
 
 Led::Led(uint8_t pin, uint8_t mode) {
     pinMode(pin, mode);
+    this->pin = pin;
 }
 
 void Led::turnOn() {
