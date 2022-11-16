@@ -2,12 +2,11 @@
 #define __BUTTONIMPL__
 
 #include "Button.h"
-#include "Component.h"
+#include "ComponentImpl.h"
 
-class ButtonImpl: public Button, public Component {
+class ButtonImpl: public Button, public ComponentImpl {
  
 public: 
-  using Component::Component;
   bool isPressed();
   bool isClicked();
   void sync();
