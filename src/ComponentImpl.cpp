@@ -1,6 +1,5 @@
 #include<Arduino.h>
 #include"ComponentImpl.h"
-#include"Component.h"
 ComponentImpl::ComponentImpl(uint8_t pin, uint8_t mode) {
     this->pin = pin;
     this->mode = mode;

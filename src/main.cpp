@@ -2,7 +2,7 @@
 #include <EnableInterrupt.h>
 #include "LedImpl.h"
 
-Led *led;
+LedImpl *led;
 
 void setup() {
   // put your setup code here, to run once:
