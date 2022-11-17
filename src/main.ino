@@ -3,8 +3,8 @@
 #include "components/LedImpl.h"
 #include "components/ButtonImpl.h"
 
-LedImpl *led;
-ButtonImpl *button;
+Led *led;
+Button *button;
 
 
 void setup() {
