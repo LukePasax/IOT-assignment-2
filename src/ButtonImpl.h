@@ -4,16 +4,17 @@
 #include "Button.h"
 #include "ComponentImpl.h"
 
-class ButtonImpl: public Button, public ComponentImpl {
+class ButtonImpl: public Button {
  
 public: 
+  using Button::Button;
   bool isPressed();
   bool isClicked();
   void sync();
 
 private:
-  bool pressed;
-  bool clicked;
+  bool pressed = false;
+  bool clicked = false; 
 };
 
 #endif

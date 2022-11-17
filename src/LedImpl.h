@@ -2,9 +2,9 @@
 #define __LEDIMPL__
 #include "ComponentImpl.h"
 #include "Led.h"
-class LedImpl : public Led, public ComponentImpl {
+class LedImpl : public Led{
     public:
-        using ComponentImpl::ComponentImpl;
+        using Led::Led;
         void turnOn();
         void turnOff();
 };

@@ -1,10 +1,10 @@
 #ifndef __BUTTON__
 #define __BUTTON__
 
-class Button {
+class Button : public ComponentImpl {
  
 public:
-  Button();
+  using ComponentImpl::ComponentImpl;
   virtual bool isPressed() = 0;
   virtual bool isClicked() = 0;
   virtual void sync();
