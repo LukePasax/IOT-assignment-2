@@ -9,12 +9,10 @@ class ButtonImpl: public Button {
 public: 
   using Button::Button;
   bool isPressed();
-  bool isClicked();
-  void sync();
+  //void sync();
 
 private:
   bool pressed = false;
-  bool clicked = false; 
 };
 
 #endif
