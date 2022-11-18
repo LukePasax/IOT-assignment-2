@@ -33,6 +33,12 @@ void Scheduler::schedule(){
   for (int i = 0; i < nTasks; i++){
     if (taskList[i]->isActive() && taskList[i]->updateAndCheckTime(basePeriod)){
       taskList[i]->tick();
+      taskList[i]->getTaskName();
+      Serial.println( " is active");
+    }
+    if (!taskList[i]->isActive()){
+      taskList[i]->getTaskName();
+      Serial.println( " is not active");
     }
   }
 }

@@ -9,6 +9,8 @@ class MyTask : public Task {
         void tick();
         //set on or off led
         void setLedState(bool state);
+        void getTaskName();
+
     private:
         bool state;
         Led *led;

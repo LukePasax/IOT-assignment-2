@@ -25,3 +25,7 @@ void MyTask::tick(){
 void MyTask::setLedState(bool state) {
     this->state = state;
 }
+
+void MyTask::getTaskName(){
+            Serial.print("MyTask");
+}
