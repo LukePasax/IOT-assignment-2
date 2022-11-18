@@ -22,3 +22,6 @@ void MyTask::tick(){
     }
 }
 
+void MyTask::setLedState(bool state) {
+    this->state = state;
+}

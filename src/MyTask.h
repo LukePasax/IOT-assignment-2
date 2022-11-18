@@ -7,7 +7,8 @@ class MyTask : public Task {
         MyTask(Led *led);
         void init(int period);
         void tick();
-        bool setState(bool state);
+        //set on or off led
+        void setLedState(bool state);
     private:
         bool state;
         Led *led;
