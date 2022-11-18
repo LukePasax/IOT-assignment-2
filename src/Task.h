@@ -4,11 +4,13 @@
 class Task {
   int myPeriod;
   int timeElapsed;
+  bool active;
   
 public:
   virtual void init(int period){
     myPeriod = period;  
     timeElapsed = 0;
+    active = true;
   }
 
   virtual void tick() = 0;
@@ -21,6 +23,14 @@ public:
     } else {
       return false; 
     }
+  }
+
+  bool isActive(){
+    return active;
+  }
+
+  void setActive(bool active){
+    this->active = active;
   }
   
 };
