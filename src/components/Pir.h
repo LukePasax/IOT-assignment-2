@@ -1,9 +1,8 @@
 #ifndef __PIR__
 #define __PIR__
 
-#include "PresenceSensor.h"
 #include "Component.h"
-class Pir: public PresenceSensor, public Component{
+class Pir:  public Component{
  
 public:     
   void sync();

@@ -1,6 +1,5 @@
 #include <Arduino.h>
-#include <EnableInterrupt.h>
-#include "components/Sonar.h"
+#include "Sonar.h"
 
 float Sonar::getDistance()
 {
