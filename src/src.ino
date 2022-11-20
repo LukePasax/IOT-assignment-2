@@ -75,7 +75,8 @@ void loop() {
   //alarm
   else
   {
-
+    ledB->turnOff();
+    ledC->turnOn();
   }
   
  
