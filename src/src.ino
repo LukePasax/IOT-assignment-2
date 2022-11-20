@@ -59,11 +59,11 @@ void loop() {
   // put your main code here, to run repeatedly:
   sched->schedule();
   distance = s->getDistance();
-
+  sched->deactivateAllTasks();
+  st->setActive(true);
   //normal
   if (distance < PE_PREALARM)
   {
-    ledCTask->setActive(false);
     ledB->turnOn();
     ledC->turnOff();
   } 
