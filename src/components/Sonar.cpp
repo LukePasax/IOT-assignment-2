@@ -12,7 +12,7 @@ float Sonar::getDistance()
     
     /* ricevi l’eco */
     long tUS = pulseInLong(echoPin, HIGH);
-    Serial.println(tUS);
+    //Serial.println(tUS);
 
     double t = tUS / 1000.0 / 1000.0 / 2;
     double d = t*this->vs;

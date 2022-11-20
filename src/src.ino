@@ -4,14 +4,15 @@
 #include "components/ButtonImpl.h"
 #include "Scheduler.h"
 #include "MyTask.h"
+#include "components/Sonar.h"
+#include "SonarTask.h"
 
 Led *led;
 Button *button;
 Scheduler *sched;
 MyTask* t;
-
-long tt;
-long t1;
+Sonar* s;
+SonarTask* st;
 
 void setup() {
   // put your setup code here, to run once:
@@ -23,19 +24,18 @@ void setup() {
   Serial.println(button->getPin());
   sched = new Scheduler();
   sched->init(1000);
-  sched->addTask(t);
-  t1 = millis();
+
+
+
+  s = new Sonar(8, 9);
+  st = new SonarTask(s);
+  st->init(3000);
+  sched->addTask(st);
+
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   sched->schedule();
-  tt=millis();
-  if (tt-t1>5000) {
-    t->setActive(false);
-  }
-  if(tt-t1>10000) {
-    t->setActive(true);
-  }
-  
 }
