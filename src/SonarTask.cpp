@@ -23,5 +23,5 @@ void SonarTask::tick(){
 }
 
 void SonarTask::getTaskName(){
-            Serial.print("SonarTask");
+    Serial.print("SonarTask");
 }

@@ -2,13 +2,13 @@
 #include "Task.h"
 #include "components/LedImpl.h"
 
-class MyTask : public Task {
+class LedTask : public Task {
     public:
-        MyTask(Led *led);
+        LedTask(Led *led);
         void init(int period);
         void tick();
         //set on or off led
-        void setLedState(bool state);
+        //void setLedState(bool state);
         void getTaskName();
 
     private:

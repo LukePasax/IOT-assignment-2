@@ -3,29 +3,36 @@
 #include "components/LedImpl.h"
 #include "components/ButtonImpl.h"
 #include "Scheduler.h"
-#include "MyTask.h"
+#include "LedTask.h"
 #include "components/Sonar.h"
 #include "SonarTask.h"
 
 Led *led;
 Button *button;
 Scheduler *sched;
-MyTask* t;
+LedTask* ledTask;
 Sonar* s;
 SonarTask* st;
+
+float distance;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   led = new LedImpl(13, OUTPUT);
-  button = new ButtonImpl(7, INPUT, false);
-  t = new MyTask(led);
-  t-> init(1000);
-  Serial.println(button->getPin());
+  ledTask = new LedTask(led);
+  //button = new ButtonImpl(7, INPUT, false);
+
+  
+  ledTask-> init(1000);
+  
   sched = new Scheduler();
   sched->init(1000);
+  
+  led->turnOn();
 
-
+  sched->addTask(ledTask);
+  ledTask->setActive(false);
 
   s = new Sonar(8, 9);
   st = new SonarTask(s);
@@ -38,4 +45,24 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   sched->schedule();
+  distance = s->getDistance();
+
+  //normal
+  if (distance < 0.5)
+  {
+    ledTask->setActive(true);
+  } 
+  //pre alarm
+  else if (distance < 1.0)
+  {
+
+  } 
+  //alarm
+  else
+  {
+
+  }
+  
+ 
 }
+
