@@ -6,7 +6,8 @@
 #include "LedTask.h"
 #include "components/Sonar.h"
 #include "SonarTask.h"
-
+#define PE_PREALARM 0.5
+#define PE_ALARM 1
 Led *ledA;
 Led *ledB;
 Led *ledC;
@@ -58,13 +59,13 @@ void loop() {
   distance = s->getDistance();
 
   //normal
-  if (distance < 0.5)
+  if (distance < PE_PREALARM)
   {
     ledB->turnOn();
     ledC->turnOff();
   } 
   //pre alarm
-  else if (distance < 1.0)
+  else if (distance < PE_ALARM)
   {
   
   } 
