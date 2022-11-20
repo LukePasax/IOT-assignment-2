@@ -42,3 +42,10 @@ void Scheduler::schedule(){
     }
   }
 }
+
+void Scheduler::deactivateAllTasks(){
+  for (int i = 0; i < nTasks; i++){
+    taskList[i]->setActive(false);
+  }
+}
+
