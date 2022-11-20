@@ -4,6 +4,7 @@
 LedTask::LedTask(Led *led) {
     state = false;  
     this->led = led;  
+    this->setActive(false);
 }
 
 void LedTask::init(int period){
