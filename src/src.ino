@@ -7,37 +7,47 @@
 #include "components/Sonar.h"
 #include "SonarTask.h"
 
-Led *led;
+Led *ledA;
+Led *ledB;
+Led *ledC;
 Button *button;
 Scheduler *sched;
-LedTask* ledTask;
+LedTask* ledATask;
+LedTask* ledBTask;
+LedTask* ledCTask;
 Sonar* s;
 SonarTask* st;
 
 float distance;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  led = new LedImpl(13, OUTPUT);
-  ledTask = new LedTask(led);
-  //button = new ButtonImpl(7, INPUT, false);
+  ledA = new LedImpl(13, OUTPUT);
+  ledATask = new LedTask(ledA);
+  ledATask-> init(1000);
+  ledB = new LedImpl(12, OUTPUT);
+  ledBTask = new LedTask(ledB);
+  ledBTask-> init(1000);
+  ledC = new LedImpl(11, OUTPUT);
+  ledCTask = new LedTask(ledC);
+  ledCTask-> init(1000);
 
-  
-  ledTask-> init(1000);
-  
+
   sched = new Scheduler();
   sched->init(1000);
   
-  led->turnOn();
+  ledA->turnOn();
 
-  sched->addTask(ledTask);
-  ledTask->setActive(false);
+  //sched->addTask(ledATask);
+  sched->addTask(ledBTask);
+  //sched->addTask(ledCTask);
 
   s = new Sonar(8, 9);
   st = new SonarTask(s);
   st->init(3000);
+  st->setActive(true);
   sched->addTask(st);
+
 
 
 }
@@ -50,12 +60,13 @@ void loop() {
   //normal
   if (distance < 0.5)
   {
-    ledTask->setActive(true);
+    ledB->turnOn();
+    ledC->turnOff();
   } 
   //pre alarm
   else if (distance < 1.0)
   {
-
+  
   } 
   //alarm
   else

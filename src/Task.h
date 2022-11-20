@@ -10,7 +10,7 @@ public:
   virtual void init(int period){
     myPeriod = period;  
     timeElapsed = 0;
-    active = true;
+    active = false;
   }
 
   virtual void tick() = 0;
