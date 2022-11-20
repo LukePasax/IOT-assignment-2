@@ -21,6 +21,8 @@ SonarTask* st;
 
 float distance;
 
+//tutte le task nascono disattivate.
+
 void setup() {
   Serial.begin(9600);
   ledA = new LedImpl(13, OUTPUT);
@@ -31,7 +33,7 @@ void setup() {
   ledBTask-> init(1000);
   ledC = new LedImpl(11, OUTPUT);
   ledCTask = new LedTask(ledC);
-  ledCTask-> init(1000);
+  ledCTask-> init(2000);
 
 
   sched = new Scheduler();
@@ -41,7 +43,7 @@ void setup() {
 
   //sched->addTask(ledATask);
   sched->addTask(ledBTask);
-  //sched->addTask(ledCTask);
+  sched->addTask(ledCTask);
 
   s = new Sonar(8, 9);
   st = new SonarTask(s);
@@ -61,13 +63,14 @@ void loop() {
   //normal
   if (distance < PE_PREALARM)
   {
+    ledCTask->setActive(false);
     ledB->turnOn();
     ledC->turnOff();
   } 
   //pre alarm
   else if (distance < PE_ALARM)
   {
-  
+    ledCTask->setActive(true);
   } 
   //alarm
   else
