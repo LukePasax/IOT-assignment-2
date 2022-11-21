@@ -7,14 +7,9 @@ class Button : public ComponentImpl {
 public:
   using ComponentImpl::ComponentImpl;
   virtual bool isPressed() = 0;
-  //virtual void sync();
-  long getLastSyncTime();
-
-protected: 
-  void updateSyncTime(long time);
 
 private:
-  long lastTimeSync;
+  bool pressed;
 
 };
 
