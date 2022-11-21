@@ -1,4 +1,3 @@
-
 #ifndef __POT__
 #define __POT__
 
