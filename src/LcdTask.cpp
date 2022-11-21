@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "../src/lib/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 #include "LcdTask.h"
+
 LcdTask::LcdTask(LiquidCrystal_I2C *lcd) {
     print = "";
     this->lcd = lcd;  
