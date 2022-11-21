@@ -6,6 +6,8 @@
 #include "LedTask.h"
 #include "components/Sonar.h"
 #include "SonarTask.h"
+#include "LcdTask.h"
+#include <LiquidCrystal_I2C.h>
 #define PE_PREALARM 0.5
 #define PE_ALARM 1
 Led *ledA;
@@ -16,14 +18,21 @@ Scheduler *sched;
 LedTask* ledATask;
 LedTask* ledBTask;
 LedTask* ledCTask;
+LcdTask* lcdTask;
 Sonar* s;
 SonarTask* st;
+
 
 float distance;
 
 //tutte le task nascono disattivate.
 
 void setup() {
+  //test lcd
+  lcdTask = new LcdTask();
+  lcdTask->setPrint("Ciao bro");
+  lcdTask->tick();
+  
   Serial.begin(9600);
   ledA = new LedImpl(13, OUTPUT);
   ledATask = new LedTask(ledA);
@@ -56,6 +65,8 @@ void setup() {
 }
 
 void loop() {
+
+  
   // put your main code here, to run repeatedly:
   sched->schedule();
   distance = s->getDistance();
