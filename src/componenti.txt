@@ -2,7 +2,7 @@ led : fatto (ledimpl.cpp)
 bottone : fatto (buttonimpl.cpp)
 potenziometro : fatto (potentiometerImpl.cpp)
 sonar : fatto ma non bene, usi sonar.cpp
-pir : manca
-motore : manca
+pir : guardare il codice online del prof
+motore : manca, installate la libreria servo
 sensore della luce : fatto (lightsensorimpl.cpp)
 
