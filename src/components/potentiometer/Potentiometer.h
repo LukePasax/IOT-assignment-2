@@ -2,7 +2,7 @@
 #ifndef __POT__
 #define __POT__
 
-#include "Component.h"
+#include "../ComponentImpl.h"
 class Potentiometer : public Component{
  
 public: 

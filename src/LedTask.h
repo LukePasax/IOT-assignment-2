@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "Task.h"
-#include "components/LedImpl.h"
+#include "components/led/LedImpl.h"
 
 class LedTask : public Task {
     public:

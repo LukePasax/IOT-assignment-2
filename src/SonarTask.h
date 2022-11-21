@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "Task.h"
-#include "components/Sonar.h"
+#include "components/sonar/Sonar.h"
 
 class SonarTask : public Task {
     public:

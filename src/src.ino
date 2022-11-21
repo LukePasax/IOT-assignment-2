@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <EnableInterrupt.h>
-#include "components/LedImpl.h"
-#include "components/ButtonImpl.h"
+#include "components/led/LedImpl.h"
+#include "components/button/ButtonImpl.h"
 #include "Scheduler.h"
 #include "LedTask.h"
-#include "components/Sonar.h"
+#include "components/sonar/Sonar.h"
 #include "SonarTask.h"
 #include "LcdTask.h"
 #include <LiquidCrystal_I2C.h>
