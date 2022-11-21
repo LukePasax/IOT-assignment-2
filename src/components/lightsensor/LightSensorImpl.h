@@ -5,7 +5,8 @@
 
 class LightSensorImpl : public LightSensor{
     public:
-        float getLight(int pin);
+        using LightSensor::LightSensor;
+        int getLight();
 };
 
 #endif

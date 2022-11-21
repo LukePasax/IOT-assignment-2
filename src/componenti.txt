@@ -4,5 +4,5 @@ potenziometro : fatto (potentiometerImpl.cpp)
 sonar : fatto ma non bene, usi sonar.cpp
 pir : manca
 motore : manca
-sensore della luce : manca
+sensore della luce : fatto (lightsensorimpl.cpp)
 

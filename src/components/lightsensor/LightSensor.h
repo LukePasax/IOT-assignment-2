@@ -1,9 +1,12 @@
 #ifndef __LIGHTSENSOR__
 #define __LIGHTSENSOR__
 
-class LightSensor{
+#include "../ComponentImpl.h"
+
+class LightSensor : public ComponentImpl{
     public:
-        virtual float getLight(int pin);
+        using ComponentImpl::ComponentImpl;
+        virtual int getLight() = 0;
 };
 
 #endif
