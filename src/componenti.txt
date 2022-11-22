@@ -1,5 +1,5 @@
 led : fatto (ledimpl.cpp)
-bottone : fatto (buttonimpl.cpp)
+bottone : non finito
 potenziometro : fatto (potentiometerImpl.cpp)
 sonar : fatto ma non bene, usi sonar.cpp
 pir : guardare il codice online del prof
