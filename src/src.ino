@@ -11,6 +11,7 @@
 #include "components/motor/MotorImpl.h"
 #include "components/pir/PirImpl.h"
 #include "components/potentiometer/PotentiometerImpl.h"
+#include "components/lightsensor/LightSensorImpl.h"
 #define PE_PREALARM 0.5
 #define PE_ALARM 1
 Led *ledA;
@@ -26,6 +27,8 @@ Sonar* s;
 SonarTask* st;
 
 float distance;
+
+LightSensor* ls;
 
 //tutte le task nascono disattivate.
 
@@ -68,6 +71,7 @@ void setup() {
 
   //servo.attach(9);
   motor = new MotorImpl(9);
+  ls = new LightSensorImpl(A1, INPUT);
 }
 
 void loop() {
@@ -78,7 +82,8 @@ void loop() {
   delay(15);
   */
 
-  motor->potMove(pot.getValue());
+  //motor->potMove(pot.getValue());
+  Serial.println(ls->getLight());
   // put your main code here, to run repeatedly:
   /*  sched->schedule();
   distance = s->getDistance();
