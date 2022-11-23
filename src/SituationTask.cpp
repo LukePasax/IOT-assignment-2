@@ -21,6 +21,8 @@ void SituationTask::init(int period){
 
 void SituationTask::tick(){
     int situation = getSituation(s->getDistance());
+    Serial.print(s->getDistance());
+    Serial.print(", ");
     Serial.println(situation);
     switch (situation) {
         case PENORMAL:
@@ -32,6 +34,7 @@ void SituationTask::tick(){
             break;
         case PEPREALARM:
             ledCTask->setActive(true);
+            ledB->turnOff(); 
             this->setPeriod(2000);
             lcdTask->setPrint("PREALARM");
             lcdTask->setActive(true);
