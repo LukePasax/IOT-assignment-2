@@ -10,6 +10,7 @@ class Scheduler {
   int basePeriod;
   int nTasks;
   Task* taskList[MAX_TASKS];  
+  long tempo1;
 
 public:
   void init(int basePeriod);  
