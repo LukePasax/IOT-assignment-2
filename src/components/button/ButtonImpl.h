@@ -6,7 +6,7 @@
 class ButtonImpl: public Button {
  
 public: 
-  ButtonImpl(uint8_t pin, uint8_t mode, bool pressed):Button(pin, mode){
+  ButtonImpl(uint8_t pin, uint8_t mode):Button(pin, mode){
     this->pressed = pressed;
   };
   bool isPressed();

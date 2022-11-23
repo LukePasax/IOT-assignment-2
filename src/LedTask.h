@@ -1,3 +1,7 @@
+#ifndef __LEDTASK__
+#define __LEDTASK__
+
+
 #include <Arduino.h>
 #include "Task.h"
 #include "components/led/LedImpl.h"
@@ -15,3 +19,5 @@ class LedTask : public Task {
         bool state;
         Led *led;
 };
+
+#endif

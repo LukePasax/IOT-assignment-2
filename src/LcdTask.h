@@ -1,6 +1,8 @@
-#include <Arduino.h>
-#include "Task.h"
+#ifndef __LCDTASK__
+#define __LCDTASK__
+
 #include <LiquidCrystal_I2C.h>
+
 class LcdTask : public Task {
     public:
         LcdTask();
@@ -13,3 +15,5 @@ class LcdTask : public Task {
         LiquidCrystal_I2C *lcd;
         String print;
 };
+
+#endif

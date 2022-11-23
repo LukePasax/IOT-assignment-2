@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "Task.h"
 #include "LcdTask.h"
 
 LcdTask::LcdTask() {
