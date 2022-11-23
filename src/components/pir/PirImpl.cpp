@@ -12,3 +12,7 @@ void PirImpl::detectMove() {
         motionDetected = false;
     }
 }
+
+bool PirImpl::isMotionDetected() {
+    return motionDetected;
+}

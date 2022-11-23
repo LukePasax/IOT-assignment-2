@@ -9,8 +9,8 @@ void MotorImpl::autoMove(int angle) {
     this->write(angle);
 }
 
-void MotorImpl::potMove(int pirValue) {
-    int val = pirValue;
+void MotorImpl::potMove(int potValue) {
+    int val = potValue;
     val = map(val, 0, 100, 0, 180);
     this->write(val);
     delay(15);
