@@ -30,11 +30,11 @@ void SituationTask::tick(){
             lcdTask->setActive(false);
             ledB->turnOn();
             ledC->turnOff();
-            //this->setPeriod(3000);
+            this->setPeriod(3000);
             break;
         case PEPREALARM:
             //ledCTask->setActive(true);
-            //this->setPeriod(2000);
+            this->setPeriod(2000);
             lcdTask->setPrint("PREALARM");
             lcdTask->setActive(true);
             break;
@@ -42,6 +42,7 @@ void SituationTask::tick(){
             ledCTask->setActive(false);
             lcdTask->setActive(true);
             //ls->setActive(false);
+            this->setPeriod(1000);
             ledB->turnOff();
             ledC->turnOn();
             break;

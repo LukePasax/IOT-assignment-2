@@ -41,7 +41,7 @@ void setup() {
   ledA = new LedImpl(4, OUTPUT);
   ledB = new LedImpl(2, OUTPUT);
   ledC = new LedImpl(3, OUTPUT);
-  MotorImpl* motor = new MotorImpl(11);
+  //MotorImpl* motor = new MotorImpl(11);
   PirImpl* pir = new PirImpl(4, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(5, INPUT);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);

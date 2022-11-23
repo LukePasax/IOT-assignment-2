@@ -28,24 +28,26 @@ bool Scheduler::addTask(Task* task){
   
 void Scheduler::schedule(){ 
 
-  Serial.println("dentro schedule");
-  Serial.println(timerFlag);
-  while (!timerFlag){Serial.println("dentro while");}
+  //Serial.println("dentro schedule");
+  //Serial.println(timerFlag);
+  while (!timerFlag){
+  //Serial.println("dentro while");
+  }
   timerFlag = false;
 
-    Serial.println("dopo while, faccio il for");
-    Serial.println(nTasks);
+    //Serial.println("dopo while, faccio il for");
+    //Serial.println(nTasks);
   for (int i = 0; i < nTasks; i++){
-    Serial.println("dentro for");
+    //Serial.println("dentro for");
     if (taskList[i]->isActive() && taskList[i]->updateAndCheckTime(basePeriod)){
       taskList[i]->tick();
-      Serial.println( " is active");
+      //Serial.println( " is active");
     }
     if (!taskList[i]->isActive()){
-      Serial.println( " is not active");
+      //Serial.println( " is not active");
     }
   }
-  Serial.println("fine");
+  //Serial.println("fine");
 }
 
 void Scheduler::deactivateAllTasks(){
