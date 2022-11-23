@@ -21,6 +21,7 @@ void SituationTask::init(int period){
 
 void SituationTask::tick(){
     int situation = getSituation(s->getDistance());
+    Serial.println(situation);
     switch (situation) {
         case PENORMAL:
             ledCTask->setActive(false);
@@ -48,7 +49,7 @@ void SituationTask::tick(){
 int SituationTask::getSituation(float distance){
 
     if(distance < 0.5){
-        return 0;
+        return 1;
     } else if (distance < 1.0){
         return 2;
     } else {
