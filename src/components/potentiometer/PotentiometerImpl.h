@@ -1,12 +1,15 @@
 #ifndef _POTENTIOMETERIMPL_
 #define _POTENTIOMETERIMPL_
 
-#include "Potentiometer.h"
 
-class PotentiometerImpl: public Potentiometer {
+class PotentiometerImpl {
  
-public: 
-  int getValue();
+  public: 
+    PotentiometerImpl(int pin);
+    uint8_t getPin();
+    int getValue();
+  private :
+    uint8_t pin;
 };
 
 #endif

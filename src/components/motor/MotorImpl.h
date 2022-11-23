@@ -3,9 +3,9 @@
 
 #include <Servo.h>
 
-class Motor {
+class MotorImpl {
     public:
-        Motor(uint8_t pin);
+        MotorImpl(uint8_t pin);
         void autoMove(int angle);
         void pirMove(int pirValue);
     private:
