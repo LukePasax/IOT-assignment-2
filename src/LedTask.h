@@ -11,19 +11,18 @@ class LedTask : public Task {
     public:
         LedTask(Led *led);
         void init(int period);
-        void tick(){
-            strategy->execute(led->getPin());
-        };
         //set on or off led
         //void setLedState(bool state);
         void getTaskName();
+        void tick(){
+            strategy->execute(led->getPin());
+        };
         void setStrategy(Strategy *strategy){
             this->strategy = strategy;
         };
 
     private:
         Strategy *strategy;
-        bool state;
         Led *led;
 };
 

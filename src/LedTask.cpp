@@ -1,8 +1,7 @@
 #include <Arduino.h>
 #include "LedTask.h"
 #include "StrategyOn.h"
-LedTask::LedTask(Led *led) {
-    state = false;  
+LedTask::LedTask(Led *led) { 
     this->led = led;  
     setStrategy(new StrategyOn());
 }
