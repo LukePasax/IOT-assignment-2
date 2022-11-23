@@ -14,13 +14,11 @@
 #include "components/lightsensor/LightSensorImpl.h"
 #include "LightSystemTask.h"
 #include "SituationTask.h"
-#define PE_PREALARM 0.5
-#define PE_ALARM 1
 Led *ledA;
 Led *ledB;
 Led *ledC;
 Button *button;
-Scheduler *sched;
+Scheduler sched;
 LedTask* ledATask;
 LedTask* ledBTask;
 LedTask* ledCTask;
@@ -28,7 +26,6 @@ LcdTask* lcdTask;
 Sonar* s;
 SonarTask* st;
 SituationTask* situationTask;
-float distance;
 
 //tutte le task nascono disattivate.
 
@@ -39,26 +36,30 @@ void setup() {
 
   
   Serial.begin(9600);
-  
-  lcdTask->setPrint("Ciao bro");
-  lcdTask->tick();
+  Serial.println("Hello world!");
   Sonar* s = new Sonar(8, 9);
   lcdTask = new LcdTask();
+  lcdTask->init(1000);
   ledB = new LedImpl(2, OUTPUT);
   ledC = new LedImpl(3, OUTPUT);
   ledCTask = new LedTask(ledC);
+  ledCTask->init(2000);
   MotorImpl* motor = new MotorImpl(11);
   PirImpl* pir = new PirImpl(4, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(5, INPUT);
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
+  ls->init(3000);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
-  //situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, ls, lcdTask, pot);
   situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, lcdTask, ls, pot);
-  sched->addTask(ledCTask);
-  sched->addTask(lcdTask);
+  situationTask->init(3000);
+  sched.addTask(ledCTask);
+  sched.addTask(lcdTask);
+  sched.addTask(situationTask);
+  situationTask->setActive(true);
+  sched.init(1000);
 
 }
 
 void loop() {
- 
+  sched.schedule();
 }

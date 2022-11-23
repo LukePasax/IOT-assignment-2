@@ -35,12 +35,18 @@ void SituationTask::tick(){
             this->setPeriod(PEPREALARM);
             lcdTask->setPrint("PREALARM");
             lcdTask->setActive(true);
+            break;
         case PEALARM:
             ledCTask->setActive(false);
             lcdTask->setActive(true);
             ls->setActive(false);
             ledB->turnOff();
             ledC->turnOn();
+            break;
+        default:
+            Serial.println("Error");
+            break;
+
 
     }
 
