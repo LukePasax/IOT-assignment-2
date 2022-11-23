@@ -1,5 +1,5 @@
 #include "Scheduler.h"
-#include <TimerOne.h>
+#include <Arduino.h>
 
 volatile bool timerFlag;
 
@@ -10,9 +10,7 @@ void timerHandler(void){
 void Scheduler::init(int basePeriod){
   this->basePeriod = basePeriod;
   timerFlag = false;
-  long period = 1000l*basePeriod;
-  Timer1.initialize(period);
-  Timer1.attachInterrupt(timerHandler);
+  tempo1 = millis();
   nTasks = 0;
 }
 
@@ -27,25 +25,15 @@ bool Scheduler::addTask(Task* task){
 }
   
 void Scheduler::schedule(){ 
+  while (millis() - tempo1 < basePeriod){}
 
-  Serial.println("dentro schedule");
-  Serial.println(timerFlag);
-  while (!timerFlag){Serial.println("dentro while");}
-  timerFlag = false;
-
-    Serial.println("dopo while, faccio il for");
-    Serial.println(nTasks);
   for (int i = 0; i < nTasks; i++){
-    Serial.println("dentro for");
+
     if (taskList[i]->isActive() && taskList[i]->updateAndCheckTime(basePeriod)){
       taskList[i]->tick();
-      Serial.println( " is active");
-    }
-    if (!taskList[i]->isActive()){
-      Serial.println( " is not active");
     }
   }
-  Serial.println("fine");
+  tempo1 = millis();
 }
 
 void Scheduler::deactivateAllTasks(){
