@@ -2,16 +2,16 @@
 #include "MotorImpl.h"
 
 MotorImpl::MotorImpl(uint8_t pin) {
-    this->pin = pin;
-    servo.attach(pin);
+    this->attach(pin);
 }
 
 void MotorImpl::autoMove(int angle) {
-    servo.write(angle);
+    this->write(angle);
 }
 
-void MotorImpl::pirMove(int pirValue) {
-    int val = map(pirValue, 0, 100, 0, 180);
-    Serial.println(val);
-    servo.write(val);
+void MotorImpl::potMove(int pirValue) {
+    int val = pirValue;
+    val = map(val, 0, 100, 0, 180);
+    this->write(val);
+    delay(15);
 }

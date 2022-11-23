@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "PotentiometerImpl.h"
 
-PotentiometerImpl::PotentiometerImpl(int pin) {
+PotentiometerImpl::PotentiometerImpl(uint8_t pin) {
   this->pin = pin;
 }
 

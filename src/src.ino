@@ -8,6 +8,9 @@
 #include "SonarTask.h"
 #include "LcdTask.h"
 #include <LiquidCrystal_I2C.h>
+#include "components/motor/MotorImpl.h"
+#include "components/pir/PirImpl.h"
+#include "components/potentiometer/PotentiometerImpl.h"
 #define PE_PREALARM 0.5
 #define PE_ALARM 1
 Led *ledA;
@@ -22,18 +25,21 @@ LcdTask* lcdTask;
 Sonar* s;
 SonarTask* st;
 
-
 float distance;
 
 //tutte le task nascono disattivate.
 
+MotorImpl* motor;
+PotentiometerImpl pot(A0);
+
 void setup() {
   //test lcd
-  lcdTask = new LcdTask();
-  lcdTask->setPrint("Ciao bro");
-  lcdTask->tick();
+
   
   Serial.begin(9600);
+  /*lcdTask = new LcdTask();
+  lcdTask->setPrint("Ciao bro");
+  lcdTask->tick();
   ledA = new LedImpl(13, OUTPUT);
   ledATask = new LedTask(ledA);
   ledATask-> init(1000);
@@ -50,29 +56,34 @@ void setup() {
   
   ledA->turnOn();
 
-  //sched->addTask(ledATask);
+  sched->addTask(ledATask);
   sched->addTask(ledBTask);
   sched->addTask(ledCTask);
 
-  s = new Sonar(8, 9);
+  s = new Sonar(8, 7);
   st = new SonarTask(s);
   st->init(3000);
   st->setActive(true);
-  sched->addTask(st);
+  sched->addTask(st);*/
 
-
-
+  //servo.attach(9);
+  motor = new MotorImpl(9);
 }
 
 void loop() {
+/*
+  int val = analogRead(A0);           
+  val = map(val, 0, 1023, 0, 180);    
+  servo.write(val);                 
+  delay(15);
+  */
 
-  
+  motor->potMove(pot.getValue());
   // put your main code here, to run repeatedly:
-  sched->schedule();
+  /*  sched->schedule();
   distance = s->getDistance();
 
   
-  //normal
   if (distance < PE_PREALARM)
   {
     sched->deactivateAllTasks();
@@ -80,20 +91,19 @@ void loop() {
     ledB->turnOn();
     ledC->turnOff();
   } 
-  //pre alarm
+
   else if (distance < PE_ALARM)
   {
     sched->deactivateAllTasks();
     st->setActive(true);
     ledCTask->setActive(true);
   } 
-  //alarm
   else
   {
     ledB->turnOff();
     ledC->turnOn();
   }
-  
+  */
  
 }
 
