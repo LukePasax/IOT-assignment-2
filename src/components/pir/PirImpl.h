@@ -6,8 +6,8 @@
 class PirImpl : public ComponentImpl{
     public:
         using ComponentImpl::ComponentImpl;
-        virtual void detectMove() = 0;
-        virtual bool isMotionDetected() = 0;
+        void detectMove();
+        bool isMotionDetected();
     private: 
         bool motionDetected;
 

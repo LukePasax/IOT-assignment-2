@@ -12,6 +12,8 @@
 #include "components/pir/PirImpl.h"
 #include "components/potentiometer/PotentiometerImpl.h"
 #include "components/lightsensor/LightSensorImpl.h"
+#include "LightSystemTask.h"
+#include "SituationTask.h"
 #define PE_PREALARM 0.5
 #define PE_ALARM 1
 Led *ledA;
@@ -28,8 +30,6 @@ SonarTask* st;
 
 float distance;
 
-LightSensor* ls;
-
 //tutte le task nascono disattivate.
 
 MotorImpl* motor;
@@ -40,75 +40,24 @@ void setup() {
 
   
   Serial.begin(9600);
-  /*lcdTask = new LcdTask();
+  
   lcdTask->setPrint("Ciao bro");
   lcdTask->tick();
-  ledA = new LedImpl(13, OUTPUT);
-  ledATask = new LedTask(ledA);
-  ledATask-> init(1000);
-  ledB = new LedImpl(12, OUTPUT);
-  ledBTask = new LedTask(ledB);
-  ledBTask-> init(1000);
-  ledC = new LedImpl(11, OUTPUT);
+  Sonar* s = new Sonar(8, 9);
+  lcdTask = new LcdTask();
+  ledB = new LedImpl(2, OUTPUT);
+  ledC = new LedImpl(3, OUTPUT);
   ledCTask = new LedTask(ledC);
-  ledCTask-> init(2000);
-
-
-  sched = new Scheduler();
-  sched->init(1000);
-  
-  ledA->turnOn();
-
-  sched->addTask(ledATask);
-  sched->addTask(ledBTask);
+  MotorImpl* motor = new MotorImpl(11);
+  PirImpl* pir = new PirImpl(4, INPUT);
+  LightSensorImpl* lsensor = new LightSensorImpl(5, INPUT);
+  LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
+  SituationTask* situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, ls, lcdTask, pot);
   sched->addTask(ledCTask);
+  sched->addTask(lcdTask);
 
-  s = new Sonar(8, 7);
-  st = new SonarTask(s);
-  st->init(3000);
-  st->setActive(true);
-  sched->addTask(st);*/
-
-  //servo.attach(9);
-  motor = new MotorImpl(9);
-  ls = new LightSensorImpl(A1, INPUT);
 }
 
 void loop() {
-/*
-  int val = analogRead(A0);           
-  val = map(val, 0, 1023, 0, 180);    
-  servo.write(val);                 
-  delay(15);
-  */
-
-  //motor->potMove(pot.getValue());
-  Serial.println(ls->getLight());
-  // put your main code here, to run repeatedly:
-  /*  sched->schedule();
-  distance = s->getDistance();
-
-  
-  if (distance < PE_PREALARM)
-  {
-    sched->deactivateAllTasks();
-    st->setActive(true);
-    ledB->turnOn();
-    ledC->turnOff();
-  } 
-
-  else if (distance < PE_ALARM)
-  {
-    sched->deactivateAllTasks();
-    st->setActive(true);
-    ledCTask->setActive(true);
-  } 
-  else
-  {
-    ledB->turnOff();
-    ledC->turnOn();
-  }
-  */
  
 }
-
