@@ -4,12 +4,12 @@
 #define PEPREALARM 2
 #define PEALARM 1
 
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, /*MotorImpl* motor,*/ LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
     this->s = s;
     this->ledCTask = ledCTask;
     this->ledB = LedB;
     this->ledC = LedC;
-    //this->m = motor;
+    this->m = motor;
     this->lcdTask = lcdTask;
     this->ls = lst;
     this->pot = pot;
@@ -33,7 +33,7 @@ void SituationTask::tick(){
             this->setPeriod(3000);
             break;
         case PEPREALARM:
-            //ledCTask->setActive(true);
+            ledCTask->setActive(true);
             this->setPeriod(2000);
             lcdTask->setPrint("PREALARM");
             lcdTask->setActive(true);
@@ -41,7 +41,7 @@ void SituationTask::tick(){
         case PEALARM:
             ledCTask->setActive(false);
             lcdTask->setActive(true);
-            //ls->setActive(false);
+            ls->setActive(false);
             this->setPeriod(1000);
             ledB->turnOff();
             ledC->turnOn();
