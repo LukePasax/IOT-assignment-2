@@ -2,7 +2,6 @@
 #define __MOTORIMPL__
 
 #include <Servo.h>
-#include "Motor.h"
 
 class MotorImpl : public Servo{
     public:

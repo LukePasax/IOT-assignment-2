@@ -1,5 +1,3 @@
-
-
 #include <Arduino.h>
 #include "Task.h"
 #include "components/sonar/Sonar.h"

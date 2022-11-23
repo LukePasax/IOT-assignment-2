@@ -1,3 +1,6 @@
+#ifndef __LIGHTSYSTEMTASK__
+#define __LIGHTSYSTEMTASK__
+
 #include <Arduino.h>
 #include "Task.h"
 #include "components/led/Led.h"
@@ -17,3 +20,5 @@ class LightSystemTask : public Task {
         PirImpl *pir;
         LightSensor *lightSensor;
 };
+
+#endif

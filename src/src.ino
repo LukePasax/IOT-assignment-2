@@ -27,13 +27,12 @@ LedTask* ledCTask;
 LcdTask* lcdTask;
 Sonar* s;
 SonarTask* st;
-
+SituationTask* situationTask;
 float distance;
 
 //tutte le task nascono disattivate.
 
 MotorImpl* motor;
-PotentiometerImpl pot(A0);
 
 void setup() {
   //test lcd
@@ -52,7 +51,9 @@ void setup() {
   PirImpl* pir = new PirImpl(4, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(5, INPUT);
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
-  SituationTask* situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, ls, lcdTask, pot);
+  PotentiometerImpl* pot = new PotentiometerImpl(A0);
+  //situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, ls, lcdTask, pot);
+  situationTask = new SituationTask(s, ledCTask, ledB, ledC, motor, lcdTask, ls, pot);
   sched->addTask(ledCTask);
   sched->addTask(lcdTask);
 

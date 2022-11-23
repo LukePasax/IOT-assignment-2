@@ -3,14 +3,15 @@
 #define PENORMAL 3000
 #define PEPREALARM 2000
 #define PEALARM 1000
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, Motor* motor, LightSystemTask* ls, LcdTask* lcdTask, PotentiometerImpl* pot) {
+
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
     this->s = s;
     this->ledCTask = ledCTask;
-    this->ledB = ledB;
-    this->ledC = ledC;
+    this->ledB = LedB;
+    this->ledC = LedC;
     this->m = motor;
-    this->ls = ls;
     this->lcdTask = lcdTask;
+    this->ls = lst;
     this->pot = pot;
 }
 
@@ -44,9 +45,10 @@ void SituationTask::tick(){
 
 }
 
-int getSituation(float distance){
+int SituationTask::getSituation(float distance){
+
     if(distance < 0.5){
-        return 1;
+        return 0;
     } else if (distance < 1.0){
         return 2;
     } else {
