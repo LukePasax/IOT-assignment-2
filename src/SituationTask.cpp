@@ -13,11 +13,9 @@ SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, 
     this->lcdTask = lcdTask;
     this->ls = lst;
     this->pot = pot;
-    Serial.println("SITUATION TASK CREATED");
 }
 
 void SituationTask::init(int period){
-    Serial.println("task init");
     Task::init(period);
 }
 
