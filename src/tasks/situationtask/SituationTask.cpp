@@ -35,18 +35,21 @@ void SituationTask::tick(){
         case PENORMAL:
             ledCTask->setPeriod(500);
             ledCTask->setStrategy(new StrategyOff());
-            
+            m->write(0);
             lcdTask->setPrint("");
             ledB->turnOn();
             this->setPeriod(3000);
-
+            b->setPressed(false);
             break;
         case PEPREALARM:
+            ledB->turnOff();
+            m->write(0);
             this->setPeriod(2000);
             ledCTask->setPeriod(2000);
             ledCTask->setStrategy(new StrategyBlink());
             lcdTask->setPrint("PREALARM " + String(distance));
             lcdTask->setActive(true);
+            b->setPressed(false);
             break;
         case PEALARM:
             this->setPeriod(1000);
