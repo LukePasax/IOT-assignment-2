@@ -1,15 +1,17 @@
 #include <Arduino.h>
 #include "SituationTask.h"
+#include "StrategyOn.h"
+#include "StrategyBlink.h"
+#include "StrategyOff.h"
 #define PENORMAL 3
 #define PEPREALARM 2
 #define PEALARM 1
 
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, Led *LedC, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, /*MotorImpl* motor,*/ LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
     this->s = s;
     this->ledCTask = ledCTask;
     this->ledB = LedB;
-    this->ledC = LedC;
-    this->m = motor;
+    //this->m = motor;
     this->lcdTask = lcdTask;
     this->ls = lst;
     this->pot = pot;
@@ -24,28 +26,28 @@ void SituationTask::tick(){
     Serial.print(s->getDistance());
     Serial.print(", ");
     Serial.println(situation);
+    ledCTask->setActive(true);
     switch (situation) {
         case PENORMAL:
-            ledCTask->setActive(false);
+            ledCTask->setStrategy(new StrategyOff());
             lcdTask->setActive(false);
             ledB->turnOn();
-            ledC->turnOff();
-            this->setPeriod(3000);
+            //this->setPeriod(3000);
             break;
         case PEPREALARM:
-            ledCTask->setActive(true);
-            ledB->turnOff(); 
-            this->setPeriod(2000);
+            //ledCTask->setActive(true);
+            //this->setPeriod(2000);
+            ledCTask->setStrategy(new StrategyBlink());
             lcdTask->setPrint("PREALARM");
             lcdTask->setActive(true);
             break;
         case PEALARM:
-            ledCTask->setActive(false);
+            ledB->turnOff();
+            ledCTask->setStrategy(new StrategyOn());
             lcdTask->setActive(true);
             ls->setActive(false);
             this->setPeriod(1000);
             ledB->turnOff();
-            ledC->turnOn();
             break;
         default:
             Serial.println("Error");
