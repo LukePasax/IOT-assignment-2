@@ -3,9 +3,7 @@
 #include "strategy/StrategyOn.h"
 #include "strategy/StrategyBlink.h"
 #include "strategy/StrategyOff.h"
-#define PENORMAL 1
-#define PEPREALARM 2
-#define PEALARM 3
+#include "Global.h"
 
 SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
                                 MotorImpl* motor, LcdTask* lcdTask,
@@ -51,12 +49,12 @@ void SituationTask::tick(){
             lcdTask->setActive(true);
             break;
         case PEALARM:
+            this->setPeriod(1000);
             ledCTask->setPeriod(500);
             ledB->turnOff();
             ledCTask->setStrategy(new StrategyOn());
             lcdTask->setActive(true);
             lcdTask->setPrint("ALARM " + String(distance));
-            this->setPeriod(1000);
             ledB->turnOff();
             Serial.println("isPressed "+String(b->isPressed()));
             if (b->isPressed()) {
@@ -77,9 +75,9 @@ void SituationTask::tick(){
 
 int SituationTask::getSituation(float distance){
 
-    if(distance < 0.5){
+    if(distance < NORMAL_W_LEVEL){
         return 3;
-    } else if (distance < 1.0){
+    } else if (distance < PREALARM_W_LEVEL){
         return 2;
     } else {
         return 1;

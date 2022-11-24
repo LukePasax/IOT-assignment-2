@@ -7,6 +7,7 @@
 #include "components/pir/PirImpl.h"
 #include "components/lightsensor/LightSensor.h"
 #include "Listener.h"
+#include "Global.h"
 class LightSystemTask : public Task, public Listener {
     public:
         LightSystemTask(Led *led, PirImpl *pir, LightSensor *lightSensor);

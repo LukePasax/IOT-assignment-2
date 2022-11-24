@@ -1,8 +1,20 @@
 #ifndef __GLOBAL__
 #define __GLOBAL__
 
-#define PENORMAL 3
+#define PENORMAL 1
 #define PEPREALARM 2
-#define PEALARM 1
+#define PEALARM 3
+
+#define PE_SCHEDULER 500
+#define PE_LEDCTASK 2000
+#define PE_LIGHTSYSTEMTASK 500
+#define PE_SITUATIONTASK 3000
+#define PE_BUTTONTASK 500
+#define PE_LCDTASK 500
+
+#define NORMAL_W_LEVEL 0.3
+#define PREALARM_W_LEVEL 0.5
+
+#define MAX_LISTENER 50
 
 #endif

@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "LightSystemTask.h"
-#include "Global.h"
 
 LightSystemTask::LightSystemTask(Led *led, PirImpl *pir, LightSensor *lightSensor) {
     this->led = led;

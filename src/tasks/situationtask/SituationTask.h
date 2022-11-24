@@ -11,7 +11,8 @@
 #include "components/potentiometer/PotentiometerImpl.h"
 #include "Listener.h"
 #include "components/button/ButtonImpl.h"
-#define MAX_LISTENER 50
+#include "Global.h"
+
 
 class SituationTask : public Task {
     public:

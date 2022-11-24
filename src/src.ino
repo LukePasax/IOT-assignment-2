@@ -15,7 +15,6 @@
 #include "tasks/situationtask/SituationTask.h"
 #include "tasks/buttontask/ButtonTask.h"
 
-#define schedulePeriod 500
 
 Led *ledA;
 Led *ledB;
@@ -35,7 +34,7 @@ MotorImpl* motor;
 void setup() {
   //test lcd
   Serial.begin(9600);
-  sched.init(schedulePeriod);
+  sched.init(PE_SCHEDULER);
   Serial.println("Hello world!");
 
   Sonar* s = new Sonar(8, 9);
@@ -49,26 +48,26 @@ void setup() {
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
 
   ledCTask = new LedTask(ledC);
-  ledCTask->init(2000);
+  ledCTask->init(PE_LEDCTASK);
   sched.addTask(ledCTask);
 
   lcdTask = new LcdTask();
-  lcdTask->init(schedulePeriod);
+  lcdTask->init(PE_LCDTASK);
   sched.addTask(lcdTask);
 
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
-  ls->init(3000);
+  ls->init(PE_LIGHTSYSTEMTASK);
   sched.addTask(ls);
 
 
   situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, pot, button);
-  situationTask->init(3000);
+  situationTask->init(PE_SITUATIONTASK);
   sched.addTask(situationTask);
   situationTask->setActive(true);
   situationTask->addListener((Listener*)ledCTask);
   
   ButtonTask* bt = new ButtonTask(button);
-  bt->init(schedulePeriod);
+  bt->init(PE_BUTTONTASK);
   bt->setActive(true);
   sched.addTask(bt);
 
