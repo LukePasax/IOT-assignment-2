@@ -7,7 +7,7 @@ void timerHandler(void){
   timerFlag = true;
 }
 
-void Scheduler::init(int basePeriod){
+void Scheduler::init(unsigned int basePeriod){
   this->basePeriod = basePeriod;
   timerFlag = false;
   tempo1 = millis();
@@ -24,7 +24,7 @@ bool Scheduler::addTask(Task* task){
   }
 }
   
-void Scheduler::schedule(){ 
+void Scheduler::schedule(){
   while (millis() - tempo1 < basePeriod){}
 
   for (int i = 0; i < nTasks; i++){

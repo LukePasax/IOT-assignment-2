@@ -7,12 +7,12 @@
 
 class Scheduler {
   
-  long basePeriod;
+  unsigned long basePeriod;
   int nTasks;
   Task* taskList[MAX_TASKS];  
-  long tempo1;
+  unsigned long tempo1;
 public:
-  void init(int basePeriod);  
+  void init(unsigned int basePeriod);  
   virtual bool addTask(Task* task);  
   virtual void schedule();
   virtual void deactivateAllTasks();

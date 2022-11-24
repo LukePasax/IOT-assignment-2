@@ -36,7 +36,6 @@ void setup() {
   sched.init(1000);
   Serial.println("Hello world!");
 
-
   Sonar* s = new Sonar(8, 9);
   ledA = new LedImpl(4, OUTPUT);
   ledB = new LedImpl(2, OUTPUT);
@@ -53,9 +52,6 @@ void setup() {
   lcdTask = new LcdTask();
   lcdTask->init(1000);
   sched.addTask(lcdTask);
-  
-
-
 
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
   ls->init(3000);
