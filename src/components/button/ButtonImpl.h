@@ -10,6 +10,7 @@ public:
     this->pressed = pressed;
   };
   bool isPressed();
+  void setPressed(bool pressed);
 
 private:
   bool pressed;

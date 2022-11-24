@@ -33,8 +33,6 @@ public:
     this->active = active;
   }
 
-  //virtual void getTaskName() = 0;
-
   void setPeriod(int period){
     myPeriod = period;
   }

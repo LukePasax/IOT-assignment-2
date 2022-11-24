@@ -7,11 +7,11 @@
 #define PEPREALARM 2
 #define PEALARM 1
 
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, /*MotorImpl* motor,*/ LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
     this->s = s;
     this->ledCTask = ledCTask;
     this->ledB = LedB;
-    //this->m = motor;
+    this->m = motor;
     this->lcdTask = lcdTask;
     this->ls = lst;
     this->pot = pot;
@@ -22,32 +22,41 @@ void SituationTask::init(int period){
 }
 
 void SituationTask::tick(){
-    int situation = getSituation(s->getDistance());
-    Serial.print(s->getDistance());
+    float distance = s->getDistance(); 
+    int situation = getSituation(distance);
+    Serial.print(distance);
     Serial.print(", ");
     Serial.println(situation);
     ledCTask->setActive(true);
+    
     switch (situation) {
         case PENORMAL:
+            ledCTask->setPeriod(500);
             ledCTask->setStrategy(new StrategyOff());
-            lcdTask->setActive(false);
+            
+            lcdTask->setPrint("");
             ledB->turnOn();
-            //this->setPeriod(3000);
+            this->setPeriod(3000);
+
             break;
         case PEPREALARM:
-            //ledCTask->setActive(true);
-            //this->setPeriod(2000);
+            this->setPeriod(2000);
+            ledCTask->setPeriod(2000);
             ledCTask->setStrategy(new StrategyBlink());
-            lcdTask->setPrint("PREALARM");
+            lcdTask->setPrint("PREALARM " + String(distance));
             lcdTask->setActive(true);
             break;
         case PEALARM:
+            ledCTask->setPeriod(500);
             ledB->turnOff();
             ledCTask->setStrategy(new StrategyOn());
             lcdTask->setActive(true);
             ls->setActive(false);
+            lcdTask->setPrint("ALARM " + String(distance));
             this->setPeriod(1000);
             ledB->turnOff();
+            
+            m->potMove(pot->getValue());
             break;
         default:
             Serial.println("Error");

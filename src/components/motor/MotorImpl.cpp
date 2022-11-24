@@ -6,6 +6,8 @@ MotorImpl::MotorImpl(uint8_t pin) {
 }
 
 void MotorImpl::autoMove(int angle) {
+    int val = angle;
+    val = map(val, 0, 50, 0, 180);
     this->write(angle);
 }
 

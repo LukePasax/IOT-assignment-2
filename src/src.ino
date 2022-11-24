@@ -14,10 +14,14 @@
 #include "components/lightsensor/LightSensorImpl.h"
 #include "LightSystemTask.h"
 #include "SituationTask.h"
+#include "ButtonTask.h"
+
+#define schedulePeriod 500
+
 Led *ledA;
 Led *ledB;
 Led *ledC;
-Button *button;
+ButtonImpl *button;
 Scheduler sched;
 LedTask* ledCTask;
 LcdTask* lcdTask;
@@ -33,10 +37,11 @@ MotorImpl* motor;
 void setup() {
   //test lcd
   Serial.begin(9600);
-  sched.init(1000);
+  sched.init(schedulePeriod);
   Serial.println("Hello world!");
 
   Sonar* s = new Sonar(8, 9);
+  button = new ButtonImpl(6, INPUT);
   ledA = new LedImpl(4, OUTPUT);
   ledB = new LedImpl(2, OUTPUT);
   ledC = new LedImpl(3, OUTPUT);
@@ -50,7 +55,7 @@ void setup() {
   sched.addTask(ledCTask);
 
   lcdTask = new LcdTask();
-  lcdTask->init(1000);
+  lcdTask->init(schedulePeriod);
   sched.addTask(lcdTask);
 
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
@@ -58,11 +63,16 @@ void setup() {
   sched.addTask(ls);
 
 
-  situationTask = new SituationTask(s, ledCTask, ledB,/* motor,*/ lcdTask, ls, pot);
+  situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, ls, pot);
   situationTask->init(3000);
   sched.addTask(situationTask);
   situationTask->setActive(true);
   
+  ButtonTask* bt = new ButtonTask(button);
+  bt->init(schedulePeriod);
+  bt->setActive(true);
+  sched.addTask(bt);
+
 
 }
 

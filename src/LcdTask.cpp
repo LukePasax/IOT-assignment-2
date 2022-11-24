@@ -2,6 +2,8 @@
 #include "Task.h"
 #include "LcdTask.h"
 
+/* Wiring: SDA => A4, SCL => A5 */
+
 LcdTask::LcdTask() {
     this->print = "";
     lcd = new LiquidCrystal_I2C(0x27, 20, 4);
