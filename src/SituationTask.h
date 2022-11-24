@@ -9,25 +9,42 @@
 #include "LightSystemTask.h"
 #include "LcdTask.h"
 #include "components/potentiometer/PotentiometerImpl.h"
+#include "Listener.h"
 #include "components/button/ButtonImpl.h"
+#define MAX_LISTENER 50
 
 class SituationTask : public Task {
     public:
-        SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot, ButtonImpl* b);
+        SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
+                                MotorImpl* motor, LcdTask* lcdTask,
+                                 PotentiometerImpl* pot, ButtonImpl* b);
         void init(int period);
         void tick();
         void getTaskName();
-
+        void addListener(Listener* listener){
+            if(numListeners < MAX_LISTENER){
+                listeners[numListeners] = listener;
+                numListeners++;
+            }
+        };
+        void notifyListeners(int value){
+            for(int i = 0; i < MAX_LISTENER; i++){
+                if(listeners[i] != NULL){
+                    listeners[i]->notified(value);
+                }
+            }
+        };
     private:
         int getSituation(float distance);
         Sonar *s;
         Led *ledB;
         LedTask *ledCTask;
         MotorImpl *m;
-        LightSystemTask *ls;
         LcdTask *lcdTask;
         PotentiometerImpl *pot;
         ButtonImpl *b;
+        Listener *listeners[MAX_LISTENER];
+        int numListeners;
         
 };
 

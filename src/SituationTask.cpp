@@ -8,14 +8,13 @@
 #define PEALARM 3
 
 SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
-                                MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst,
+                                MotorImpl* motor, LcdTask* lcdTask,
                                  PotentiometerImpl* pot, ButtonImpl* b) {
     this->s = s;
     this->ledCTask = ledCTask;
     this->ledB = LedB;
     this->m = motor;
     this->lcdTask = lcdTask;
-    this->ls = lst;
     this->pot = pot;
     this->b = b;
 }
@@ -28,6 +27,7 @@ void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
     Serial.print(distance);
+    this->notifyListeners(situation);
     Serial.print(", ");
     Serial.println(situation);
     ledCTask->setActive(true);
@@ -54,7 +54,6 @@ void SituationTask::tick(){
             ledB->turnOff();
             ledCTask->setStrategy(new StrategyOn());
             lcdTask->setActive(true);
-            ls->setActive(false);
             lcdTask->setPrint("ALARM " + String(distance));
             this->setPeriod(1000);
             ledB->turnOff();

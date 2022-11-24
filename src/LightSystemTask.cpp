@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "LightSystemTask.h"
+#include "Global.h"
 
 LightSystemTask::LightSystemTask(Led *led, PirImpl *pir, LightSensor *lightSensor) {
     this->led = led;
@@ -18,5 +19,13 @@ void LightSystemTask::tick() {
 
 void LightSystemTask::getTaskName() {
     Serial.println("LightSystemTask");
+}
+
+void LightSystemTask::notified(int notify) {
+    if(notify > PEPREALARM){
+        this->setActive(false);
+    }else{
+        this->setActive(true);
+    }
 }
 
