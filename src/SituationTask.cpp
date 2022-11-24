@@ -2,6 +2,7 @@
 #include "SituationTask.h"
 #include "StrategyOn.h"
 #include "StrategyBlink.h"
+#include "StrategyOff.h"
 #define PENORMAL 3
 #define PEPREALARM 2
 #define PEALARM 1
@@ -28,7 +29,7 @@ void SituationTask::tick(){
     switch (situation) {
         case PENORMAL:
             //lc spento
-            ledCTask->setActive(false);
+            ledCTask->setStrategy(new StrategyOff());
             lcdTask->setActive(false);
             ledB->turnOn();
             //this->setPeriod(3000);
@@ -42,6 +43,7 @@ void SituationTask::tick(){
             lcdTask->setActive(true);
             break;
         case PEALARM:
+            ledB->turnOff();
             ledCTask->setActive(true);
             ledCTask->setStrategy(new StrategyOn());
             lcdTask->setActive(true);
