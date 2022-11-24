@@ -19,9 +19,12 @@ class SituationTask : public Task {
         SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
                                 MotorImpl* motor, LcdTask* lcdTask,
                                  PotentiometerImpl* pot, ButtonImpl* b);
-        void init(int period);
         void tick();
         void getTaskName();
+        void executeNormal();
+        void executePrealarm(int distance);
+        void executeAlarm(int distance);
+        void init(int period);
         void addListener(Listener* listener){
             if(numListeners < MAX_LISTENER){
                 listeners[numListeners] = listener;

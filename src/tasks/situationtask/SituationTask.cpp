@@ -16,6 +16,7 @@ SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB,
     this->pot = pot;
     this->b = b;
     this->numListeners=0;
+    ledCTask->setActive(true);
 }
 
 void SituationTask::init(int period){
@@ -29,45 +30,12 @@ void SituationTask::tick(){
     Serial.print(", ");
     Serial.println(situation);
     this->notifyListeners(situation);
-    ledCTask->setActive(true);
     
     switch (situation) {
         case PENORMAL:
-            ledCTask->setPeriod(500);
-            ledCTask->setStrategy(new StrategyOff());
-            m->write(0);
-            lcdTask->setPrint("");
-            ledB->turnOn();
-            this->setPeriod(3000);
-            b->setPressed(false);
-            break;
-        case PEPREALARM:
-            ledB->turnOff();
-            m->write(0);
-            this->setPeriod(2000);
-            ledCTask->setPeriod(2000);
-            ledCTask->setStrategy(new StrategyBlink());
-            lcdTask->setPrint("PREALARM " + String(distance));
-            lcdTask->setActive(true);
-            b->setPressed(false);
             break;
         case PEALARM:
-            this->setPeriod(1000);
-            ledCTask->setPeriod(500);
-            ledB->turnOff();
-            ledCTask->setStrategy(new StrategyOn());
-            lcdTask->setActive(true);
-            lcdTask->setPrint("ALARM " + String(distance));
-            ledB->turnOff();
-            Serial.println("isPressed "+String(b->isPressed()));
-            if (b->isPressed()) {
-                m->potMove(pot->getValue());
-            } else {
-                distance = distance*100;
-                int a = (int)distance;
-                m->autoMove(a);
-                Serial.println("autoMove");
-            }
+            executeAlarm(distance);
             break;
         default:
             Serial.println("Error");
@@ -76,8 +44,42 @@ void SituationTask::tick(){
 
 }
 
-int SituationTask::getSituation(float distance){
+void SituationTask::executeNormal(){
+    ledCTask->setPeriod(500);
+    ledCTask->setStrategy(new StrategyOff());
+    lcdTask->setPrint("");
+    ledB->turnOn();
+    this->setPeriod(3000);
+}
+void SituationTask::executePrealarm(int distance){
+    this->setPeriod(2000);
+    ledCTask->setPeriod(2000);
+    ledCTask->setStrategy(new StrategyBlink());
+    lcdTask->setPrint("PREALARM " + String(distance));
+    lcdTask->setActive(true);
+}
 
+void SituationTask::executeAlarm(int distance){
+    this->setPeriod(1000);
+    ledCTask->setPeriod(500);
+    ledB->turnOff();
+    ledCTask->setStrategy(new StrategyOn());
+    lcdTask->setActive(true);
+    lcdTask->setPrint("ALARM " + String(distance));
+    ledB->turnOff();
+    Serial.println("isPressed "+String(b->isPressed()));
+    if (b->isPressed()) {
+        m->potMove(pot->getValue());
+    } else {
+        distance = distance*100;
+        int a = (int)distance;
+        m->autoMove(a);
+        Serial.println("autoMove");
+    }
+}
+
+
+int SituationTask::getSituation(float distance){
     if(distance < NORMAL_W_LEVEL){
         return 3;
     } else if (distance < PREALARM_W_LEVEL){
