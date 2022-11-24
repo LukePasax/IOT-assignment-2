@@ -14,12 +14,8 @@ class LedTask : public Task {
         //set on or off led
         //void setLedState(bool state);
         void getTaskName();
-        void tick(){
-            strategy->execute(led->getPin());
-        };
-        void setStrategy(Strategy *strategy){
-            this->strategy = strategy;
-        };
+        void tick();
+        void setStrategy(Strategy *strategy);
 
     private:
         Strategy *strategy;

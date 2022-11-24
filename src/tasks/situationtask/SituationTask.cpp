@@ -44,6 +44,7 @@ void SituationTask::tick(){
 
 }
 
+
 void SituationTask::executeNormal(){
     ledCTask->setPeriod(500);
     ledCTask->setStrategy(new StrategyOff());
@@ -78,6 +79,20 @@ void SituationTask::executeAlarm(int distance){
     }
 }
 
+void SituationTask::addListener(Listener* listener){
+    if(numListeners < MAX_LISTENER){
+        listeners[numListeners] = listener;
+        numListeners++;
+    }
+};
+
+void SituationTask::notifyListeners(int value){
+    for(int i = 0; i < numListeners; i++){
+        if(listeners[i] != NULL){
+            listeners[i]->notified(value);
+        }
+    }
+};
 
 int SituationTask::getSituation(float distance){
     if(distance < NORMAL_W_LEVEL){

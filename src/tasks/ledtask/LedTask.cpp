@@ -10,6 +10,13 @@ void LedTask::init(int period){
     Task::init(period);
 }
 
+void LedTask::tick(){
+    strategy->execute(led->getPin());
+};
+
+void LedTask::setStrategy(Strategy *strategy){
+    this->strategy = strategy;
+};
 void LedTask::getTaskName(){
     Serial.print("LedTask");
 }

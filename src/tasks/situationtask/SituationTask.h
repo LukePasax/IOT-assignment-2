@@ -25,19 +25,8 @@ class SituationTask : public Task {
         void executePrealarm(int distance);
         void executeAlarm(int distance);
         void init(int period);
-        void addListener(Listener* listener){
-            if(numListeners < MAX_LISTENER){
-                listeners[numListeners] = listener;
-                numListeners++;
-            }
-        };
-        void notifyListeners(int value){
-            for(int i = 0; i < numListeners; i++){
-                if(listeners[i] != NULL){
-                    listeners[i]->notified(value);
-                }
-            }
-        };
+        void addListener(Listener* listener);
+        void notifyListeners(int value);
     private:
         int getSituation(float distance);
         Sonar *s;

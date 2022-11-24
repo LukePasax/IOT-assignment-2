@@ -7,7 +7,6 @@ class Button : public ComponentImpl {
 public:
 
   Button(uint8_t pin, uint8_t mode) : ComponentImpl(pin, mode) {}
-
   virtual bool isPressed() = 0;
   virtual void setPressed(bool pressed) = 0;
 
