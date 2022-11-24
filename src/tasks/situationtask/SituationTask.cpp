@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "SituationTask.h"
-#include "StrategyOn.h"
-#include "StrategyBlink.h"
-#include "StrategyOff.h"
+#include "strategy/StrategyOn.h"
+#include "strategy/StrategyBlink.h"
+#include "strategy/StrategyOff.h"
 #define PENORMAL 1
 #define PEPREALARM 2
 #define PEALARM 3

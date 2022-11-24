@@ -3,18 +3,17 @@
 #include "components/led/LedImpl.h"
 #include "components/button/ButtonImpl.h"
 #include "Scheduler.h"
-#include "LedTask.h"
+#include "tasks/ledtask/LedTask.h"
 #include "components/sonar/Sonar.h"
-#include "SonarTask.h"
-#include "LcdTask.h"
+#include "tasks/lcdtask/LcdTask.h"
 #include <LiquidCrystal_I2C.h>
 #include "components/motor/MotorImpl.h"
 #include "components/pir/PirImpl.h"
 #include "components/potentiometer/PotentiometerImpl.h"
 #include "components/lightsensor/LightSensorImpl.h"
-#include "LightSystemTask.h"
-#include "SituationTask.h"
-#include "ButtonTask.h"
+#include "tasks/lightsystemtask/LightSystemTask.h"
+#include "tasks/situationtask/SituationTask.h"
+#include "tasks/buttontask/ButtonTask.h"
 
 #define schedulePeriod 500
 
@@ -26,7 +25,6 @@ Scheduler sched;
 LedTask* ledCTask;
 LcdTask* lcdTask;
 Sonar* s;
-SonarTask* st;
 SituationTask* situationTask;
 MotorImpl* motor;
 

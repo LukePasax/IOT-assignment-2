@@ -4,10 +4,10 @@
 #include <Arduino.h>
 #include "Task.h"
 #include "components/sonar/Sonar.h"
-#include "LedTask.h"
+#include "tasks/ledtask/LedTask.h"
 #include "components/motor/MotorImpl.h"
-#include "LightSystemTask.h"
-#include "LcdTask.h"
+#include "tasks/lightsystemtask/LightSystemTask.h"
+#include "tasks/lcdtask/LcdTask.h"
 #include "components/potentiometer/PotentiometerImpl.h"
 #include "Listener.h"
 #include "components/button/ButtonImpl.h"

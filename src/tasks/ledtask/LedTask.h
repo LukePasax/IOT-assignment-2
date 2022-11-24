@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include "Task.h"
 #include "components/led/LedImpl.h"
-#include "Strategy.h"
+#include "strategy/Strategy.h"
 
 class LedTask : public Task {
     public:
