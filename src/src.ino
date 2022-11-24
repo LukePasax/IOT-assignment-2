@@ -63,7 +63,7 @@ void setup() {
   sched.addTask(ls);
 
 
-  situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, ls, pot);
+  situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, ls, pot, button);
   situationTask->init(3000);
   sched.addTask(situationTask);
   situationTask->setActive(true);

@@ -10,7 +10,7 @@ public:
   virtual void setPressed(bool pressed) = 0;
 
 private:
-  bool pressed;
+  bool pressed = false;
 
 };
 

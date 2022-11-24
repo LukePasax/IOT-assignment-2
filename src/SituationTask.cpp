@@ -3,11 +3,13 @@
 #include "StrategyOn.h"
 #include "StrategyBlink.h"
 #include "StrategyOff.h"
-#define PENORMAL 3
+#define PENORMAL 1
 #define PEPREALARM 2
-#define PEALARM 1
+#define PEALARM 3
 
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot) {
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
+                                MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst,
+                                 PotentiometerImpl* pot, ButtonImpl* b) {
     this->s = s;
     this->ledCTask = ledCTask;
     this->ledB = LedB;
@@ -15,6 +17,7 @@ SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* 
     this->lcdTask = lcdTask;
     this->ls = lst;
     this->pot = pot;
+    this->b = b;
 }
 
 void SituationTask::init(int period){
@@ -55,8 +58,14 @@ void SituationTask::tick(){
             lcdTask->setPrint("ALARM " + String(distance));
             this->setPeriod(1000);
             ledB->turnOff();
-            
-            m->potMove(pot->getValue());
+            if (b->isPressed()) {
+                m->potMove(pot->getValue());
+            } else {
+                distance = distance*100;
+                int a = (int)distance;
+                m->autoMove(a);
+                Serial.println("autoMove");
+            }
             break;
         default:
             Serial.println("Error");

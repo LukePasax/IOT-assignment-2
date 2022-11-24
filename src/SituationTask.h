@@ -9,10 +9,11 @@
 #include "LightSystemTask.h"
 #include "LcdTask.h"
 #include "components/potentiometer/PotentiometerImpl.h"
+#include "components/button/ButtonImpl.h"
 
 class SituationTask : public Task {
     public:
-        SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot);
+        SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, MotorImpl* motor, LcdTask* lcdTask, LightSystemTask* lst, PotentiometerImpl* pot, ButtonImpl* b);
         void init(int period);
         void tick();
         void getTaskName();
@@ -26,6 +27,7 @@ class SituationTask : public Task {
         LightSystemTask *ls;
         LcdTask *lcdTask;
         PotentiometerImpl *pot;
+        ButtonImpl *b;
         
 };
 
