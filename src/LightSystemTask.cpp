@@ -22,6 +22,7 @@ void LightSystemTask::getTaskName() {
 }
 
 void LightSystemTask::notified(int notify) {
+    Serial.println("LightSystemTask notified");
     if(notify > PEPREALARM){
         this->setActive(false);
     }else{

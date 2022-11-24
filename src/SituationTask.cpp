@@ -17,6 +17,7 @@ SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB,
     this->lcdTask = lcdTask;
     this->pot = pot;
     this->b = b;
+    this->numListeners=0;
 }
 
 void SituationTask::init(int period){
@@ -27,9 +28,9 @@ void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
     Serial.print(distance);
-    this->notifyListeners(situation);
     Serial.print(", ");
     Serial.println(situation);
+    this->notifyListeners(situation);
     ledCTask->setActive(true);
     
     switch (situation) {
@@ -57,6 +58,7 @@ void SituationTask::tick(){
             lcdTask->setPrint("ALARM " + String(distance));
             this->setPeriod(1000);
             ledB->turnOff();
+            Serial.println("isPressed "+String(b->isPressed()));
             if (b->isPressed()) {
                 m->potMove(pot->getValue());
             } else {

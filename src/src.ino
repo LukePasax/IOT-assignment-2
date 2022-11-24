@@ -67,6 +67,7 @@ void setup() {
   situationTask->init(3000);
   sched.addTask(situationTask);
   situationTask->setActive(true);
+  situationTask->addListener((Listener*)ledCTask);
   
   ButtonTask* bt = new ButtonTask(button);
   bt->init(schedulePeriod);

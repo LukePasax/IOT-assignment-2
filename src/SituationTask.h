@@ -28,7 +28,7 @@ class SituationTask : public Task {
             }
         };
         void notifyListeners(int value){
-            for(int i = 0; i < MAX_LISTENER; i++){
+            for(int i = 0; i < numListeners; i++){
                 if(listeners[i] != NULL){
                     listeners[i]->notified(value);
                 }
