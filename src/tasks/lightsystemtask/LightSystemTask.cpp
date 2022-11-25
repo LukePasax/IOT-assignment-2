@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "LightSystemTask.h"
+#include "global.h"
 
 LightSystemTask::LightSystemTask(Led *led, PirImpl *pir, LightSensor *lightSensor) {
     this->led = led;
@@ -15,13 +16,11 @@ void LightSystemTask::init(int period) {
 void LightSystemTask::tick() {
     if(notification != 3) {
         if (pir->isMotionDetected()) {
-            if(lightSensor->getLight() < 10){
+            if(lightSensor->getLight() < LIGHTLEVEL){
                 led->turnOn();
             }
-
         } else {
             led->turnOff();
-
         }
     }
 }
