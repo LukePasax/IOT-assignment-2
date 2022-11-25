@@ -46,32 +46,29 @@ void setup() {
   PirImpl* pir = new PirImpl(7, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(A2, INPUT);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
-
   ledCTask = new LedTask(ledC);
-  ledCTask->init(PE_LEDCTASK);
-  sched.addTask(ledCTask);
-
   lcdTask = new LcdTask();
-  lcdTask->init(PE_LCDTASK);
-  sched.addTask(lcdTask);
-
   LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
-  ls->init(PE_LIGHTSYSTEMTASK);
-  sched.addTask(ls);
-
-
   situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, pot, button);
+  ButtonTask* bt = new ButtonTask(button);
+
+  lcdTask->init(PE_LCDTASK);
+  ledCTask->init(PE_LEDCTASK);
+  ls->init(PE_LIGHTSYSTEMTASK);
   situationTask->init(PE_SITUATIONTASK);
-  sched.addTask(situationTask);
+  bt->init(PE_BUTTONTASK);
+
   situationTask->setActive(true);
+  bt->setActive(true);
   situationTask->addListener((Listener*)ledCTask);
   situationTask->addListener((Listener*)ls);
   
-  ButtonTask* bt = new ButtonTask(button);
-  bt->init(PE_BUTTONTASK);
-  bt->setActive(true);
-  sched.addTask(bt);
 
+  sched.addTask(ledCTask);
+  sched.addTask(lcdTask);
+  sched.addTask(ls);
+  sched.addTask(situationTask);
+  sched.addTask(bt);
 
 }
 
