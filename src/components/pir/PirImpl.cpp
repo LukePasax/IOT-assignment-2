@@ -3,6 +3,6 @@
 
 bool PirImpl::isMotionDetected() {
     int read = digitalRead(this->getPin());
-    Serial.println(read);
+    Serial.println("motion detected : " + String(read));
     return read == HIGH;
 }

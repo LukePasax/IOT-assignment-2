@@ -22,8 +22,8 @@ class SituationTask : public Task {
         void tick();
         void getTaskName();
         void executeNormal();
-        void executePrealarm(int distance);
-        void executeAlarm(int distance);
+        void executePrealarm(float distance);
+        void executeAlarm(float distance);
         void init(int period);
         void addListener(Listener* listener);
         void notifyListeners(int value);

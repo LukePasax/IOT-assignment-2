@@ -31,10 +31,17 @@ void SituationTask::tick(){
     Serial.println(situation);
     this->notifyListeners(situation);
     
+    //Serial.println(digitalRead(ledCTask->getLed()->getPin()));
+
     switch (situation) {
         case PENORMAL:
+            executeNormal();
+            break;
+        case PEPREALARM:
+            executePrealarm(distance);
             break;
         case PEALARM:
+            
             executeAlarm(distance);
             break;
         default:
@@ -46,37 +53,49 @@ void SituationTask::tick(){
 
 
 void SituationTask::executeNormal(){
-    ledCTask->setPeriod(500);
-    ledCTask->setStrategy(new StrategyOff());
+    //ledCTask->setPeriod(500);
+    //ledCTask->setStrategy(new StrategyOff());
+    ledCTask->getLed()->turnOff();
+    m->write(0);
     lcdTask->setPrint("");
     ledB->turnOn();
     this->setPeriod(3000);
+    b->setPressed(false);
 }
-void SituationTask::executePrealarm(int distance){
+void SituationTask::executePrealarm(float distance){
+    ledB->turnOff();
+    m->write(0);
     this->setPeriod(2000);
-    ledCTask->setPeriod(2000);
-    ledCTask->setStrategy(new StrategyBlink());
+    if (digitalRead(ledCTask->getLed()->getPin())){
+        ledCTask->getLed()->turnOff();
+    } else {
+        ledCTask->getLed()->turnOn();
+    }
+    //ledCTask->setPeriod(2000);
+    //ledCTask->setStrategy(new StrategyBlink());
     lcdTask->setPrint("PREALARM " + String(distance));
     lcdTask->setActive(true);
+    b->setPressed(false);
 }
 
-void SituationTask::executeAlarm(int distance){
+void SituationTask::executeAlarm(float distance){
     this->setPeriod(1000);
-    ledCTask->setPeriod(500);
+    //ledCTask->setPeriod(500);
     ledB->turnOff();
-    ledCTask->setStrategy(new StrategyOn());
+    ledCTask->getLed()->turnOn();
+    //ledCTask->setStrategy(new StrategyOn());
     lcdTask->setActive(true);
     lcdTask->setPrint("ALARM " + String(distance));
     ledB->turnOff();
     Serial.println("isPressed "+String(b->isPressed()));
     if (b->isPressed()) {
-        m->potMove(pot->getValue());
-    } else {
-        distance = distance*100;
-        int a = (int)distance;
-        m->autoMove(a);
-        Serial.println("autoMove");
-    }
+                m->potMove(pot->getValue());
+            } else {
+                distance = distance*100;
+                int a = (int)distance;
+                m->autoMove(a);
+                Serial.println("autoMove");
+            }
 }
 
 void SituationTask::addListener(Listener* listener){

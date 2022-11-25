@@ -43,7 +43,7 @@ void setup() {
   ledB = new LedImpl(2, OUTPUT);
   ledC = new LedImpl(3, OUTPUT);
   MotorImpl* motor = new MotorImpl(11);
-  PirImpl* pir = new PirImpl(4, INPUT);
+  PirImpl* pir = new PirImpl(7, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(5, INPUT);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
 
@@ -65,6 +65,7 @@ void setup() {
   sched.addTask(situationTask);
   situationTask->setActive(true);
   situationTask->addListener((Listener*)ledCTask);
+  situationTask->addListener((Listener*)ls);
   
   ButtonTask* bt = new ButtonTask(button);
   bt->init(PE_BUTTONTASK);

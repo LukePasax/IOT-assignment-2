@@ -16,6 +16,9 @@ class LedTask : public Task {
         void getTaskName();
         void tick();
         void setStrategy(Strategy *strategy);
+        Led* getLed(){
+            return led;
+        }
 
     private:
         Strategy *strategy;
