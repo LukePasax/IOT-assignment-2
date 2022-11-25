@@ -17,6 +17,6 @@
 
 #define MAX_LISTENER 50
 
-#define LIGHTLEVEL 500
+#define LIGHTLEVEL 900
 
 #endif

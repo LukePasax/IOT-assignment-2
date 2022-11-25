@@ -54,7 +54,7 @@ void setup() {
 
   lcdTask->init(PE_LCDTASK);
   ledCTask->init(PE_LEDCTASK);
-  ls->init(PE_LIGHTSYSTEMTASK);
+  ls->init(1000);
   situationTask->init(PE_SITUATIONTASK);
   bt->init(PE_BUTTONTASK);
 

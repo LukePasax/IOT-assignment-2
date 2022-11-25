@@ -26,10 +26,10 @@ void SituationTask::init(int period){
 void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
+    this->notifyListeners(situation);
     Serial.print(distance);
     Serial.print(", ");
     Serial.println(situation);
-    this->notifyListeners(situation);
     ledCTask->setActive(true);
     switch (situation) {
         case PENORMAL:

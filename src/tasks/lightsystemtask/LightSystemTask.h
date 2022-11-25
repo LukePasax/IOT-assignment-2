@@ -17,11 +17,12 @@ class LightSystemTask : public Task, public Listener {
         void notified(int notify);
 
     private:
-        bool state;
+        bool lightTurnedOn;
         Led *led;
         PirImpl *pir;
         LightSensor *lightSensor;
         int notification;
+        int time;
 
 };
 
