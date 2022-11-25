@@ -30,8 +30,6 @@ void SituationTask::tick(){
     Serial.print(", ");
     Serial.println(situation);
     this->notifyListeners(situation);
-    
-    //Serial.println(digitalRead(ledCTask->getLed()->getPin()));
     ledCTask->setActive(true);
     switch (situation) {
         case PENORMAL:
@@ -56,7 +54,6 @@ void SituationTask::executeNormal(){
     ledCTask->setActive(true);
     ledCTask->setPeriod(500);
     ledCTask->setStrategy(new StrategyOff());
-    //ledCTask->getLed()->turnOff();
     m->write(0);
     lcdTask->setPrint("");
     ledB->turnOn();
@@ -68,11 +65,6 @@ ledCTask->setActive(true);
     ledB->turnOff();
     m->write(0);
     this->setPeriod(2000);
-    /*if (digitalRead(ledCTask->getLed()->getPin())){
-        ledCTask->getLed()->turnOff();
-    } else {
-        ledCTask->getLed()->turnOn();
-    }*/
     ledCTask->setPeriod(2000);
     ledCTask->setStrategy(new StrategyBlink());
     lcdTask->setPrint("PREALARM " + String(distance));
@@ -85,7 +77,6 @@ ledCTask->setActive(true);
     this->setPeriod(1000);
     ledCTask->setPeriod(500);
     ledB->turnOff();
-    //ledCTask->getLed()->turnOn();
     ledCTask->setStrategy(new StrategyOn());
     lcdTask->setActive(true);
     lcdTask->setPrint("ALARM " + String(distance));

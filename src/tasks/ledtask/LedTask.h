@@ -11,14 +11,9 @@ class LedTask : public Task {
     public:
         LedTask(Led *led);
         void init(int period);
-        //set on or off led
-        //void setLedState(bool state);
         void getTaskName();
         void tick();
         void setStrategy(Strategy *strategy);
-        Led* getLed(){
-            return led;
-        }
 
     private:
         Strategy *strategy;
