@@ -9,7 +9,7 @@ MotorImpl::MotorImpl(uint8_t pin) {
 void MotorImpl::autoMove(int angle) {
     int val = angle;
     float val2 = NORMAL_W_LEVEL*100;
-    val = map(val, 0, (int)val2, 0, 180);
+    val = map(val, (int)val2, 0, 0, 180);
     this->write(val);
 }
 

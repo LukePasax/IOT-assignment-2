@@ -21,15 +21,12 @@ void LightSystemTask::tick() {
         lightTurnedOn = true;
         time = millis();
         Serial.println("Turned on");
-    } else if (lightTurnedOn && ((!pir->isMotionDetected() && millis() - time < 4000) || lightSensor->getLight() > LIGHTLEVEL)) {
+    } else if (lightTurnedOn && ((!pir->isMotionDetected() && millis() - time > 4000) || lightSensor->getLight() > LIGHTLEVEL)) {
         led->turnOff();
         lightTurnedOn = false;
         Serial.println("Turned off");
     }
-    /*else if (millis() - time > 4000 && lightTurnedOn) {
-        lightTurnedOn = false;
-        led->turnOff();
-    }*/
+    
     
 }
 
