@@ -14,7 +14,7 @@ void LightSystemTask::init(int period) {
 }
 
 void LightSystemTask::tick() {
-    if (pir->isMotionDetected() && lightSensor->getLight() < LIGHTLEVEL) {
+    if (pir->isMotionDetected() ) {
         led->turnOn();
     } else {
         led->turnOff();
@@ -29,6 +29,7 @@ void LightSystemTask::notified(int notify) {
     Serial.println("LightSystemTask notified");
     notification = notify;
     if(notify == PEALARM){
+        led->turnOff();
         this->setActive(false);
     }else{
         this->setActive(true);
