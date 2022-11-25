@@ -21,6 +21,7 @@ class LightSystemTask : public Task, public Listener {
         Led *led;
         PirImpl *pir;
         LightSensor *lightSensor;
+        int notification;
 
 };
 
