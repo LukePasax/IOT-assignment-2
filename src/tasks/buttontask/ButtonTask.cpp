@@ -13,10 +13,10 @@ void ButtonTask::tick() {
   if (digitalRead(b->getPin()) == HIGH) {
     if (b->isPressed() == false) {
         b->setPressed(true);
-        Serial.println("Button pressed");
+        //Serial.println("Button pressed");
     } else {
         b->setPressed(false);
-        Serial.println("Button released");
+        //Serial.println("Button released");
     }
    }
 }
