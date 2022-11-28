@@ -4,7 +4,6 @@
 
 LightSystemTask::LightSystemTask(LedTask *led, PirImpl *pir, LightSensor *lightSensor) {
     this->led = led;
-    this->led->setPeriod(500);
     this->pir = pir;
     this->lightSensor = lightSensor;
     time = 0;
@@ -16,7 +15,7 @@ void LightSystemTask::init(int period) {
 }
 
 void LightSystemTask::tick() {
-
+    this->led->setActive(true);
     if (!lightTurnedOn && pir->isMotionDetected() && lightSensor->getLight() < LIGHTLEVEL) {
         led->setStrategy(new StrategyOn());
         lightTurnedOn = true;

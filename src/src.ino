@@ -59,6 +59,7 @@ void setup() {
   ls->init(1000);
   situationTask->init(PE_SITUATIONTASK);
   bt->init(PE_BUTTONTASK);
+  ledATask->setPeriod(500);
 
   situationTask->setActive(true);
   bt->setActive(true);
@@ -71,6 +72,7 @@ void setup() {
   sched.addTask(ls);
   sched.addTask(situationTask);
   sched.addTask(bt);
+  sched.addTask(ledATask);
 
 }
 
