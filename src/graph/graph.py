@@ -10,8 +10,8 @@ x=list()
 y=list()
 i=0
 ser = serial.Serial('/dev/cu.usbmodem14201',9600)
-#ser.close()
-#ser.open()
+ser.close()
+ser.open()
 while True:
 
     data = ser.readline()
@@ -26,4 +26,5 @@ while True:
     #if i close the plot, close the program
     if plt.fignum_exists(fig.number) == False:
         break  
-    
+
+ser.close()
