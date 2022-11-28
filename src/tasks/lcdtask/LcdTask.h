@@ -8,12 +8,14 @@ class LcdTask : public Task {
         LcdTask();
         void init(int period);
         void tick();
-        void setPrint(String print);
+        void setPrint(String print1, String print2, String print3);
         void getTaskName();
 
     private:
         LiquidCrystal_I2C *lcd;
-        String print;
+        String print1;
+        String print2;
+        String print3;
 };
 
 #endif
