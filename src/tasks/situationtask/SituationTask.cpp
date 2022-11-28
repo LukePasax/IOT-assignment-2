@@ -32,14 +32,13 @@ void SituationTask::tick(){
     //Serial.println(situation);
     ledCTask->setActive(true);
     switch (situation) {
-        case PENORMAL:
+        case NORMAL:
             executeNormal();
             break;
-        case PEPREALARM:
+        case PREALARM:
             executePrealarm(distance);
             break;
-        case PEALARM:
-            
+        case ALARM:
             executeAlarm(distance);
             break;
         default:
@@ -51,20 +50,20 @@ void SituationTask::tick(){
 
 
 void SituationTask::executeNormal(){
+    this->setPeriod(PE_NORMAL);
     ledCTask->setActive(true);
     ledCTask->setPeriod(500);
     ledCTask->setStrategy(new StrategyOff());
     m->write(0);
     lcdTask->setPrint("");
     ledB->turnOn();
-    this->setPeriod(3000);
     b->setPressed(false);
 }
 void SituationTask::executePrealarm(float distance){
-ledCTask->setActive(true);
+    this->setPeriod(PE_PREALARM);
+    ledCTask->setActive(true);
     ledB->turnOff();
     m->write(0);
-    this->setPeriod(2000);
     ledCTask->setPeriod(2000);
     ledCTask->setStrategy(new StrategyBlink());
     lcdTask->setPrint("PREALARM " + String(distance));
@@ -73,8 +72,8 @@ ledCTask->setActive(true);
 }
 
 void SituationTask::executeAlarm(float distance){
-ledCTask->setActive(true);
-    this->setPeriod(1000);
+    this->setPeriod(PE_ALARM);
+    ledCTask->setActive(true);
     ledCTask->setPeriod(500);
     ledB->turnOff();
     ledCTask->setStrategy(new StrategyOn());
@@ -83,12 +82,12 @@ ledCTask->setActive(true);
     ledB->turnOff();
     //Serial.println("isPressed "+String(b->isPressed()));
     if (b->isPressed()) {
-                m->potMove(pot->getValue());
-            } else {
-                distance = distance*100;
-                int a = (int)distance;
-                m->autoMove(a);
-            }
+        m->potMove(pot->getValue());
+    } else {
+        distance = distance*100;
+        int a = (int)distance;
+        m->autoMove(a);
+    }
 }
 
 void SituationTask::addListener(Listener* listener){

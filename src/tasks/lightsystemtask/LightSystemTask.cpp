@@ -34,7 +34,7 @@ void LightSystemTask::getTaskName() {
 
 void LightSystemTask::notified(int notify) {
     notification = notify;
-    if(notify == PEALARM){
+    if(notify == ALARM){
         lightTurnedOn = false;
         led->turnOff();
         this->setActive(false);

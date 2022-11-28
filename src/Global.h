@@ -1,9 +1,13 @@
 #ifndef __GLOBAL__
 #define __GLOBAL__
 
-#define PENORMAL 1
-#define PEPREALARM 2
-#define PEALARM 3
+#define NORMAL 1
+#define PREALARM 2
+#define ALARM 3
+
+#define PE_ALARM 1000
+#define PE_PREALARM 2000
+#define PE_NORMAL 3000
 
 #define PE_SCHEDULER 500
 #define PE_LEDCTASK 2000
