@@ -8,7 +8,7 @@ pl.xlabel("Time (s)")
 pl.ylabel("Water Level")
 pl.title("Water level over time")
 
-ser = serial.Serial('/dev/cu.usbmodem14201', 9600, timeout=1)
+
 
 data = []
 #time = []
@@ -28,17 +28,24 @@ def draw_graph():
         time.pop(0)
     pl.plot(data,time)
 
-#anim = animation.FuncAnimation(pl.gcf(), draw_graph, interval=1000)
-
-#pl.show()
-#draw_graph()
-
+#do the code even if an exception is thrown always
 while (1):
-    line = ser.readline()
-    if line:
-        string = line.decode()
-        num = float(string)
-        data.append(num)
+    try:
+        anim = animation.FuncAnimation(pl.gcf(), draw_graph, interval=1000)
 
-    print(data)
-    time.sleep(1)
+        pl.show()
+        draw_graph()
+
+        '''
+        ser = serial.Serial('/dev/cu.usbmodem14201', 9600)
+        line = ser.readline()
+        if line:
+            string = line.decode()
+            num = float(string)
+            data.append(num)
+
+        print(data)
+        '''
+
+    except:
+        pass
