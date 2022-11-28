@@ -16,7 +16,7 @@
 
 class SituationTask : public Task {
     public:
-        SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
+        SituationTask(Sonar *s, LedTask *ledCTask, LedTask *LedB, 
                                 MotorImpl* motor, LcdTask* lcdTask,
                                  PotentiometerImpl* pot, ButtonImpl* b);
         void tick();
@@ -30,7 +30,7 @@ class SituationTask : public Task {
     private:
         int getSituation(float distance);
         Sonar *s;
-        Led *ledB;
+        LedTask *ledBTask;
         LedTask *ledCTask;
         MotorImpl *m;
         LcdTask *lcdTask;

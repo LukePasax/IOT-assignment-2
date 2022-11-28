@@ -21,8 +21,9 @@ Led *ledB;
 Led *ledC;
 ButtonImpl *button;
 Scheduler sched;
-LedTask* ledCTask;
 LedTask* ledATask;
+LedTask* ledBTask;
+LedTask* ledCTask;
 LcdTask* lcdTask;
 Sonar* s;
 SituationTask* situationTask;
@@ -47,19 +48,20 @@ void setup() {
   PirImpl* pir = new PirImpl(7, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(A2, INPUT);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
+  ledATask = new LedTask(ledA);
+  ledBTask = new LedTask(ledB);
   ledCTask = new LedTask(ledC);
   lcdTask = new LcdTask();
-  ledATask = new LedTask(ledA);
   LightSystemTask* ls = new LightSystemTask(ledATask, pir, lsensor);
-  situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, pot, button);
+  situationTask = new SituationTask(s, ledCTask, ledBTask, motor, lcdTask, pot, button);
   ButtonTask* bt = new ButtonTask(button);
-
-  lcdTask->init(PE_LCDTASK);
+  ledATask->init(500);
+  ledBTask->init(500);
   ledCTask->init(PE_LEDCTASK);
+  lcdTask->init(PE_LCDTASK);
   ls->init(1000);
   situationTask->init(PE_SITUATIONTASK);
   bt->init(PE_BUTTONTASK);
-  ledATask->setPeriod(500);
 
   situationTask->setActive(true);
   bt->setActive(true);
@@ -67,12 +69,13 @@ void setup() {
   situationTask->addListener((Listener*)ls);
   
 
+  sched.addTask(ledATask);
+  sched.addTask(ledBTask);
   sched.addTask(ledCTask);
   sched.addTask(lcdTask);
   sched.addTask(ls);
   sched.addTask(situationTask);
   sched.addTask(bt);
-  sched.addTask(ledATask);
 
 }
 

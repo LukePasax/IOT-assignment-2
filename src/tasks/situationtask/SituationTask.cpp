@@ -5,12 +5,12 @@
 #include "strategy/StrategyOff.h"
 #include "Global.h"
 
-SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB, 
+SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, LedTask *LedBTask, 
                                 MotorImpl* motor, LcdTask* lcdTask,
                                  PotentiometerImpl* pot, ButtonImpl* b) {
     this->s = s;
     this->ledCTask = ledCTask;
-    this->ledB = LedB;
+    this->ledBTask = LedBTask;
     this->m = motor;
     this->lcdTask = lcdTask;
     this->pot = pot;
@@ -28,6 +28,7 @@ void SituationTask::tick(){
     this->notifyListeners(situation);
     Serial.println(distance);
     ledCTask->setActive(true);
+    ledBTask->setActive(true);
     switch (situation) {
         case NORMAL:
             executeNormal();
@@ -52,12 +53,12 @@ void SituationTask::executeNormal(){
     ledCTask->setStrategy(new StrategyOff());
     m->write(0);
     lcdTask->setPrint("");
-    ledB->turnOn();
+    ledBTask->setStrategy(new StrategyOn());
     b->setPressed(false);
 }
 void SituationTask::executePrealarm(float distance){
     this->setPeriod(PE_PREALARM);
-    ledB->turnOff();
+    ledBTask->setStrategy(new StrategyOff());
     m->write(0);
     ledCTask->setPeriod(2000);
     ledCTask->setStrategy(new StrategyBlink());
@@ -69,11 +70,10 @@ void SituationTask::executePrealarm(float distance){
 void SituationTask::executeAlarm(float distance){
     this->setPeriod(PE_ALARM);
     ledCTask->setPeriod(500);
-    ledB->turnOff();
+    ledBTask->setStrategy(new StrategyOff());
     ledCTask->setStrategy(new StrategyOn());
     lcdTask->setActive(true);
     lcdTask->setPrint("ALARM " + String(distance));
-    ledB->turnOff();
     //Serial.println("isPressed "+String(b->isPressed()));
     if (b->isPressed()) {
         m->potMove(pot->getValue());
