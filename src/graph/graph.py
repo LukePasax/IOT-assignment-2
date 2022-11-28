@@ -4,10 +4,8 @@ import numpy as np
 plt.ion()
 fig=plt.figure()
 
-
-i=0
-x=list()
-y=list()
+x=[]
+y=[]
 i=0
 ser = serial.Serial('/dev/cu.usbmodem14201',9600)
 ser.close()
@@ -15,16 +13,15 @@ ser.open()
 while True:
 
     data = ser.readline()
-    #print(data.decode())
-    x.append(i)
-    y.append(data.decode())
 
-    plt.scatter(i, float(data.decode()))
+    x.append(i)
+    y.append(float(data.decode()))
+    plt.plot(x,y, 'b')
+    plt.axis([-0.001, i, 0, 4])
     i += 1
     plt.show()
-    plt.pause(1)  # Note this correction
-    #if i close the plot, close the program
+    plt.pause(0.5)
     if plt.fignum_exists(fig.number) == False:
         break  
 
-ser.close()
+#ser.close()
