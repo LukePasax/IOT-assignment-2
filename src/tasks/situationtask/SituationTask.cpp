@@ -16,7 +16,6 @@ SituationTask::SituationTask(Sonar *s, LedTask *ledCTask, Led *LedB,
     this->pot = pot;
     this->b = b;
     this->numListeners=0;
-    ledCTask->setActive(true);
 }
 
 void SituationTask::init(int period){
@@ -28,8 +27,6 @@ void SituationTask::tick(){
     int situation = getSituation(distance);
     this->notifyListeners(situation);
     Serial.println(distance);
-    //Serial.print(", ");
-    //Serial.println(situation);
     ledCTask->setActive(true);
     switch (situation) {
         case NORMAL:
@@ -51,7 +48,6 @@ void SituationTask::tick(){
 
 void SituationTask::executeNormal(){
     this->setPeriod(PE_NORMAL);
-    ledCTask->setActive(true);
     ledCTask->setPeriod(500);
     ledCTask->setStrategy(new StrategyOff());
     m->write(0);
@@ -61,7 +57,6 @@ void SituationTask::executeNormal(){
 }
 void SituationTask::executePrealarm(float distance){
     this->setPeriod(PE_PREALARM);
-    ledCTask->setActive(true);
     ledB->turnOff();
     m->write(0);
     ledCTask->setPeriod(2000);
@@ -73,7 +68,6 @@ void SituationTask::executePrealarm(float distance){
 
 void SituationTask::executeAlarm(float distance){
     this->setPeriod(PE_ALARM);
-    ledCTask->setActive(true);
     ledCTask->setPeriod(500);
     ledB->turnOff();
     ledCTask->setStrategy(new StrategyOn());
