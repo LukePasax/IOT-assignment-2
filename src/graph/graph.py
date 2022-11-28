@@ -1,51 +1,25 @@
-import matplotlib.pyplot as pl
-from matplotlib import animation
 import serial
-import time
+import matplotlib.pyplot as plt
+import numpy as np
+plt.ion()
+fig=plt.figure()
 
 
-pl.xlabel("Time (s)")
-pl.ylabel("Water Level")
-pl.title("Water level over time")
+i=0
+x=list()
+y=list()
+i=0
+ser = serial.Serial('COM3',9600)
+ser.close()
+ser.open()
+while True:
 
-ser = serial.Serial('/dev/cu.usbmodem14201', 9600)
+    data = ser.readline()
+    print(data.decode())
+    x.append(i)
+    y.append(data.decode())
 
-data = []
-time = []
-count = 0
-
-def draw_graph():
-    global count
-    count += 1
-    line = ser.readline()
-    if line:
-        string = line.decode()
-        num = float(string)
-        data.append(num)
-    time.append(count)
-    if(data.__len__() > 4):
-        data.pop(0)
-        time.pop(0)
-    pl.plot(data,time)
-
-#do the code even if an exception is thrown always
-while (1):
-    try:
-        anim = animation.FuncAnimation(pl.gcf(), draw_graph, interval=1000)
-
-        pl.show()
-        draw_graph()
-
-        '''
-        ser = serial.Serial('/dev/cu.usbmodem14201', 9600)
-        line = ser.readline()
-        if line:
-            string = line.decode()
-            num = float(string)
-            data.append(num)
-
-        print(data)
-        '''
-
-    except:
-        pass
+    plt.scatter(i, float(data.decode()))
+    i += 1
+    plt.show()
+    plt.pause(0.0001)  # Note this correction
