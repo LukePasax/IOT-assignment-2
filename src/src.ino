@@ -35,7 +35,6 @@ void setup() {
   //test lcd
   Serial.begin(9600);
   sched.init(PE_SCHEDULER);
-  Serial.println("Hello world!");
 
   Sonar* s = new Sonar(8, 9);
   button = new ButtonImpl(6, INPUT);

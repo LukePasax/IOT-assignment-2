@@ -27,9 +27,9 @@ void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
     this->notifyListeners(situation);
-    Serial.print(distance);
-    Serial.print(", ");
-    Serial.println(situation);
+    Serial.println(distance);
+    //Serial.print(", ");
+    //Serial.println(situation);
     ledCTask->setActive(true);
     switch (situation) {
         case PENORMAL:
@@ -81,14 +81,13 @@ ledCTask->setActive(true);
     lcdTask->setActive(true);
     lcdTask->setPrint("ALARM " + String(distance));
     ledB->turnOff();
-    Serial.println("isPressed "+String(b->isPressed()));
+    //Serial.println("isPressed "+String(b->isPressed()));
     if (b->isPressed()) {
                 m->potMove(pot->getValue());
             } else {
                 distance = distance*100;
                 int a = (int)distance;
                 m->autoMove(a);
-                Serial.println("autoMove");
             }
 }
 
