@@ -13,7 +13,6 @@ ser.close()
 ser.open()
 while True:
     data = ser.readline()
-
     x.append(i)
     y.append(float(data.decode()))
     plt.plot(x,y, 'b')
@@ -23,5 +22,4 @@ while True:
     plt.pause(0.5)
     if plt.fignum_exists(fig.number) == False:
         break  
-
 ser.close()

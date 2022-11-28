@@ -3,14 +3,17 @@
 
 #include <Arduino.h>
 #include "Task.h"
+#include "tasks/ledtask/LedTask.h"
 #include "components/led/Led.h"
 #include "components/pir/PirImpl.h"
 #include "components/lightsensor/LightSensor.h"
 #include "Listener.h"
 #include "Global.h"
+#include "strategy/StrategyOn.h"
+#include "strategy/StrategyOff.h"
 class LightSystemTask : public Task, public Listener {
     public:
-        LightSystemTask(Led *led, PirImpl *pir, LightSensor *lightSensor);
+        LightSystemTask(LedTask *led, PirImpl *pir, LightSensor *lightSensor);
         void init(int period);
         void tick();
         void getTaskName();
@@ -18,7 +21,7 @@ class LightSystemTask : public Task, public Listener {
 
     private:
         bool lightTurnedOn;
-        Led *led;
+        LedTask *led;
         PirImpl *pir;
         LightSensor *lightSensor;
         int notification;

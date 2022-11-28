@@ -22,10 +22,12 @@ Led *ledC;
 ButtonImpl *button;
 Scheduler sched;
 LedTask* ledCTask;
+LedTask* ledATask;
 LcdTask* lcdTask;
 Sonar* s;
 SituationTask* situationTask;
 MotorImpl* motor;
+
 
 //tutte le task nascono disattivate.
 
@@ -47,7 +49,8 @@ void setup() {
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
   ledCTask = new LedTask(ledC);
   lcdTask = new LcdTask();
-  LightSystemTask* ls = new LightSystemTask(ledA, pir, lsensor);
+  ledATask = new LedTask(ledA);
+  LightSystemTask* ls = new LightSystemTask(ledATask, pir, lsensor);
   situationTask = new SituationTask(s, ledCTask, ledB, motor, lcdTask, pot, button);
   ButtonTask* bt = new ButtonTask(button);
 
