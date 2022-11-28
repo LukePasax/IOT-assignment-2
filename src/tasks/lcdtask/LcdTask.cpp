@@ -20,9 +20,9 @@ void LcdTask::tick(){
     this->lcd->clear();
     this->lcd->setCursor(2, 1);
     this->lcd->print(print1);
-    this->lcd->setCursor(3, 1);
+    this->lcd->setCursor(2, 2);
     this->lcd->print(print2);
-    this->lcd->setCursor(4, 1);
+    this->lcd->setCursor(2, 3);
     this->lcd->print(print3);
 }
 void LcdTask::setPrint(String print1, String print2, String print3){

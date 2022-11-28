@@ -52,7 +52,7 @@ void SituationTask::executeNormal(){
     ledCTask->setPeriod(500);
     ledCTask->setStrategy(new StrategyOff());
     m->write(0);
-    lcdTask->setPrint("");
+    lcdTask->setPrint("", "", "");
     ledBTask->setStrategy(new StrategyOn());
     b->setPressed(false);
 }
@@ -62,7 +62,7 @@ void SituationTask::executePrealarm(float distance){
     m->write(0);
     ledCTask->setPeriod(2000);
     ledCTask->setStrategy(new StrategyBlink());
-    lcdTask->setPrint("PREALARM " + String(distance));
+    lcdTask->setPrint("PREALARM " + String(distance), "", "");
     lcdTask->setActive(true);
     b->setPressed(false);
 }
@@ -73,14 +73,16 @@ void SituationTask::executeAlarm(float distance){
     ledBTask->setStrategy(new StrategyOff());
     ledCTask->setStrategy(new StrategyOn());
     lcdTask->setActive(true);
-    lcdTask->setPrint("ALARM " + String(distance));
-    //Serial.println("isPressed "+String(b->isPressed()));
     if (b->isPressed()) {
-        m->potMove(pot->getValue());
+        int val = pot->getValue();
+        lcdTask->setPrint("ALARM " + String(distance), "Valve opened: " + String(val), "MANUAL MODE");
+        m->potMove(val);
     } else {
+        float val = distance;
         distance = distance*100;
         int a = (int)distance;
         m->autoMove(a);
+        lcdTask->setPrint("ALARM " + String(val), "Valve opened: " + String(a), "AUTOMATIC MODE");
     }
 }
 
