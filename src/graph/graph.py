@@ -8,10 +8,10 @@ pl.xlabel("Time (s)")
 pl.ylabel("Water Level")
 pl.title("Water level over time")
 
-
+ser = serial.Serial('/dev/cu.usbmodem14201', 9600)
 
 data = []
-#time = []
+time = []
 count = 0
 
 def draw_graph():
