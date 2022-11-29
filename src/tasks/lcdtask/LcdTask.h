@@ -9,7 +9,6 @@ class LcdTask : public Task {
         void init(int period);
         void tick();
         void setPrint(String print1, String print2, String print3);
-        void getTaskName();
 
     private:
         LiquidCrystal_I2C *lcd;

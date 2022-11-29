@@ -25,37 +25,38 @@ LedTask* ledATask;
 LedTask* ledBTask;
 LedTask* ledCTask;
 LcdTask* lcdTask;
+LightSystemTask* ls;
+ButtonTask* bt;
 Sonar* s;
 SituationTask* situationTask;
 MotorImpl* motor;
-
+PirImpl* pir;
+LightSensorImpl* lsensor;
+PotentiometerImpl* pot;
 
 //tutte le task nascono disattivate.
 
-
-
 void setup() {
-  //test lcd
   Serial.begin(9600);
   sched.init(PE_SCHEDULER);
 
-  Sonar* s = new Sonar(8, 9);
+  s = new Sonar(8, 9);
   button = new ButtonImpl(6, INPUT);
   ledA = new LedImpl(4, OUTPUT);
   ledB = new LedImpl(2, OUTPUT);
   ledC = new LedImpl(3, OUTPUT);
-  MotorImpl* motor = new MotorImpl(11);
-  PirImpl* pir = new PirImpl(7, INPUT);
-  LightSensorImpl* lsensor = new LightSensorImpl(A2, INPUT);
-  PotentiometerImpl* pot = new PotentiometerImpl(A0);
+  motor = new MotorImpl(11);
+  pir = new PirImpl(7, INPUT);
+  lsensor = new LightSensorImpl(A2, INPUT);
+  pot = new PotentiometerImpl(A0);
   
   ledATask = new LedTask(ledA);
   ledBTask = new LedTask(ledB);
   ledCTask = new LedTask(ledC);
   lcdTask = new LcdTask();
-  LightSystemTask* ls = new LightSystemTask(ledATask, pir, lsensor);
+  ls = new LightSystemTask(ledATask, pir, lsensor);
   situationTask = new SituationTask(s, ledCTask, ledBTask, motor, lcdTask, pot, button);
-  ButtonTask* bt = new ButtonTask(button);
+  bt = new ButtonTask(button);
 
   ledATask->init(500);
   ledBTask->init(500);

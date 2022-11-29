@@ -17,6 +17,3 @@ void LedTask::tick(){
 void LedTask::setStrategy(Strategy *strategy){
     this->strategy = strategy;
 };
-void LedTask::getTaskName(){
-    Serial.print("LedTask");
-}

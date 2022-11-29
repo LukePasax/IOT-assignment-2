@@ -46,7 +46,6 @@ void SituationTask::tick(){
 
 }
 
-
 void SituationTask::executeNormal(){
     this->setPeriod(PE_NORMAL);
     ledCTask->setPeriod(500);
@@ -56,6 +55,7 @@ void SituationTask::executeNormal(){
     ledBTask->setStrategy(new StrategyOn());
     b->setPressed(false);
 }
+
 void SituationTask::executePrealarm(float distance){
     this->setPeriod(PE_PREALARM);
     ledBTask->setStrategy(new StrategyOff());
@@ -82,7 +82,6 @@ void SituationTask::executeAlarm(float distance){
         distance = distance*100;
         int a = (int)distance;
         m->autoMove(a);
-        //Serial.println(100 - (a*100/30));
         lcdTask->setPrint("ALARM " + String(val), "Valve opened: " + String(100 - (a*100/30)), "AUTOMATIC MODE");
     }
 }

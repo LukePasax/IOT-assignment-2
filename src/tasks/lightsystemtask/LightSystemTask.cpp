@@ -28,10 +28,6 @@ void LightSystemTask::tick() {
     
 }
 
-void LightSystemTask::getTaskName() {
-    Serial.println("LightSystemTask");
-}
-
 void LightSystemTask::notified(int notify) {
     notification = notify;
     if(notify == ALARM){

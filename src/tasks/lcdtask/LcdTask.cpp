@@ -9,13 +9,11 @@ LcdTask::LcdTask() {
     this->lcd->init();
     this->lcd->backlight();
 }
+
 void LcdTask::init(int period){
     Task::init(period);
 }
 
-void LcdTask::getTaskName() {
-    Serial.println("LcdTask");
-}
 void LcdTask::tick(){
     this->lcd->clear();
     this->lcd->setCursor(2, 1);
@@ -25,10 +23,9 @@ void LcdTask::tick(){
     this->lcd->setCursor(2, 3);
     this->lcd->print(print3);
 }
+
 void LcdTask::setPrint(String print1, String print2, String print3){
     this->print1 = print1;
     this->print2 = print2;
     this->print3 = print3;
 }
-
-

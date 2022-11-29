@@ -20,7 +20,6 @@ class SituationTask : public Task {
                                 MotorImpl* motor, LcdTask* lcdTask,
                                  PotentiometerImpl* pot, ButtonImpl* b);
         void tick();
-        void getTaskName();
         void executeNormal();
         void executePrealarm(float distance);
         void executeAlarm(float distance);

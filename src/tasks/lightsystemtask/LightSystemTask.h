@@ -16,7 +16,6 @@ class LightSystemTask : public Task, public Listener {
         LightSystemTask(LedTask *led, PirImpl *pir, LightSensor *lightSensor);
         void init(int period);
         void tick();
-        void getTaskName();
         void notified(int notify);
 
     private:

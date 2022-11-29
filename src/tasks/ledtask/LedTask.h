@@ -11,7 +11,6 @@ class LedTask : public Task {
     public:
         LedTask(Led *led);
         void init(int period);
-        void getTaskName();
         void tick();
         void setStrategy(Strategy *strategy);
 
