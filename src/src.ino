@@ -68,7 +68,6 @@ void setup() {
 
   situationTask->setActive(true);
   bt->setActive(true);
-  situationTask->addListener((Listener*)ledCTask);
   situationTask->addListener((Listener*)ls);
   
 
