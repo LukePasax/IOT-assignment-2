@@ -8,7 +8,7 @@ fig=plt.figure()
 x=[]
 y=[]
 i=0
-ser = serial.Serial("/dev/cu.usbmodem14101", 9600)
+ser = serial.Serial("/dev/cu.usbmodem14201", 9600)
 ser.close()
 ser.open()
 while True:
@@ -16,7 +16,7 @@ while True:
     x.append(i)
     y.append(float(data.decode()))
     plt.plot(x,y, 'b')
-    plt.axis([-0.001, i, 0, 4])
+    plt.axis([-0.001, i, 0, 1])
     i += 1
     plt.show()
     plt.pause(0.5)

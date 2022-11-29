@@ -48,6 +48,7 @@ void setup() {
   PirImpl* pir = new PirImpl(7, INPUT);
   LightSensorImpl* lsensor = new LightSensorImpl(A2, INPUT);
   PotentiometerImpl* pot = new PotentiometerImpl(A0);
+  
   ledATask = new LedTask(ledA);
   ledBTask = new LedTask(ledB);
   ledCTask = new LedTask(ledC);
@@ -55,13 +56,14 @@ void setup() {
   LightSystemTask* ls = new LightSystemTask(ledATask, pir, lsensor);
   situationTask = new SituationTask(s, ledCTask, ledBTask, motor, lcdTask, pot, button);
   ButtonTask* bt = new ButtonTask(button);
+
   ledATask->init(500);
   ledBTask->init(500);
   ledCTask->init(PE_LEDCTASK);
   lcdTask->init(PE_LCDTASK);
   ls->init(1000);
   situationTask->init(PE_SITUATIONTASK);
-  bt->init(PE_BUTTONTASK);
+  bt->init(1000);
 
   situationTask->setActive(true);
   bt->setActive(true);

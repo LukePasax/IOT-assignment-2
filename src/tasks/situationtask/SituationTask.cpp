@@ -82,7 +82,8 @@ void SituationTask::executeAlarm(float distance){
         distance = distance*100;
         int a = (int)distance;
         m->autoMove(a);
-        lcdTask->setPrint("ALARM " + String(val), "Valve opened: " + String(a), "AUTOMATIC MODE");
+        //Serial.println(100 - (a*100/30));
+        lcdTask->setPrint("ALARM " + String(val), "Valve opened: " + String(100 - (a*100/30)), "AUTOMATIC MODE");
     }
 }
 
