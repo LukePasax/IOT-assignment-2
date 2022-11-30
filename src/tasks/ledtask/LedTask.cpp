@@ -17,3 +17,7 @@ void LedTask::tick(){
 void LedTask::setStrategy(Strategy *strategy){
     this->strategy = strategy;
 };
+
+int LedTask::getPin(){
+    return led->getPin();
+}

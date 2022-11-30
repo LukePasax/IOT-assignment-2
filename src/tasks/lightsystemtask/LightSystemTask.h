@@ -25,7 +25,6 @@ class LightSystemTask : public Task, public Listener {
         LightSensor *lightSensor;
         int notification;
         int time;
-
 };
 
 #endif

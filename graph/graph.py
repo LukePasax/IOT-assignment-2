@@ -8,7 +8,7 @@ fig=plt.figure()
 x=[]
 y=[]
 i=0
-ser = serial.Serial("/dev/cu.usbmodem14201", 9600)
+ser = serial.Serial("COM7", 9600)
 ser.close()
 ser.open()
 while True:

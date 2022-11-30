@@ -25,7 +25,6 @@ void LightSystemTask::tick() {
         lightTurnedOn = false;
     }
     
-    
 }
 
 void LightSystemTask::notified(int notify) {
@@ -34,7 +33,13 @@ void LightSystemTask::notified(int notify) {
         lightTurnedOn = false;
         led->setStrategy(new StrategyOff());
         this->setActive(false);
+        Serial.println("SYSTEM OFF ");
     }else{
         this->setActive(true);
+        if(digitalRead(led->getPin())){
+            Serial.println("ON ");
+        }else{
+            Serial.println("OFF ");
+        }
     }
 }

@@ -13,6 +13,7 @@ class LedTask : public Task {
         void init(int period);
         void tick();
         void setStrategy(Strategy *strategy);
+        int getPin();
 
     private:
         Strategy *strategy;
