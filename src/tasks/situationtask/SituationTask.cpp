@@ -26,17 +26,20 @@ void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
     this->notifyListeners(situation);
-    Serial.println(distance);
+    Serial.print(distance);
     ledCTask->setActive(true);
     ledBTask->setActive(true);
     switch (situation) {
         case NORMAL:
+            Serial.println(" NORMAL, ON");
             executeNormal();
             break;
         case PREALARM:
+            Serial.println(" PREALARM, ON");
             executePrealarm(distance);
             break;
         case ALARM:
+            Serial.println(" ALARM, OFF");
             executeAlarm(distance);
             break;
         default:

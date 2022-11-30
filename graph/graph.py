@@ -13,8 +13,11 @@ ser.close()
 ser.open()
 while True:
     data = ser.readline()
+    nums = data.decode()
+    print(nums)
+    nums = nums.split(' ')[0]
     x.append(i)
-    y.append(float(data.decode()))
+    y.append(float(nums))
     plt.plot(x,y, 'b')
     plt.axis([-0.001, i, 0, 1])
     i += 1
