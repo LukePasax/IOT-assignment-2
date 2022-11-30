@@ -25,28 +25,27 @@ void SituationTask::init(int period){
 void SituationTask::tick(){
     float distance = s->getDistance(); 
     int situation = getSituation(distance);
-    this->notifyListeners(situation);
     Serial.print(distance);
     ledCTask->setActive(true);
     ledBTask->setActive(true);
     switch (situation) {
         case NORMAL:
-            Serial.println(" NORMAL, ON");
+            Serial.print(" NORMAL ");
             executeNormal();
             break;
         case PREALARM:
-            Serial.println(" PREALARM, ON");
+            Serial.print(" PREALARM ");
             executePrealarm(distance);
             break;
         case ALARM:
-            Serial.println(" ALARM, OFF");
+            Serial.print(" ALARM ");
             executeAlarm(distance);
             break;
         default:
             Serial.println("Error");
             break;
     }
-
+    this->notifyListeners(situation);
 }
 
 void SituationTask::executeNormal(){

@@ -16,6 +16,8 @@ while True:
     nums = data.decode()
     print(nums)
     nums = nums.split(' ')[0]
+    if (float(nums) > 1):
+        nums = 0.99
     x.append(i)
     y.append(float(nums))
     plt.plot(x,y, 'b')
