@@ -30,15 +30,15 @@ void SituationTask::tick(){
     ledBTask->setActive(true);
     switch (situation) {
         case NORMAL:
-            Serial.print(" NORMAL ");
+            Serial.print(" NORMAL, ");
             executeNormal();
             break;
         case PREALARM:
-            Serial.print(" PREALARM ");
+            Serial.print(" PREALARM, ");
             executePrealarm(distance);
             break;
         case ALARM:
-            Serial.print(" ALARM ");
+            Serial.print(" ALARM, ");
             executeAlarm(distance);
             break;
         default:
